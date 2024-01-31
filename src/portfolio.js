@@ -7,10 +7,10 @@ const header = {
 const about = {
   // all the properties are optional - can be left empty or deleted
   name: 'Basem Saleh',
-  role: 'Machine Learning Engineer',
+  role: 'A Machine Learning Engineer.',
   description:
-    'Adipisicing sit fugit ullam unde aliquid sequi Facilis soluta facilis perspiciatis corporis nulla aspernatur. Autem eligendi rerum delectus modi quisquam? Illo ut quasi nemo ipsa cumque perspiciatis! Maiores minima consectetur.',
-  resume: 'https://example.com',
+    "I've worn many hats in my career. These days, I'm a machine learning engineer, software engineer, and electrical engineer.",
+  resume: 'https://1drv.ms/b/s!AqnlclWCzWwap1yECOm4lOTHcuBh?e=Sc6BWC',
   social: {
     linkedin: 'https://linkedin.com/in/basem-a-saleh',
     github: 'https://github.com/mreagles524',
@@ -21,28 +21,20 @@ const projects = [
   // projects can be added an removed
   // if there are no projects, Projects section won't show up
   {
-    name: 'Project 1',
+    name: 'Dead By Daylight Killer AI (WIP)',
     description:
-      'Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam',
-    stack: ['SASS', 'TypeScript', 'React'],
-    sourceCode: 'https://github.com',
-    livePreview: 'https://github.com',
+      "An Object detection and tracking model for a killer in Dead by Daylight. This repo's goal is stand up an AI that will hunt, chase, kill, and hook survivors that are identified while navigating between generators without any human input.",
+    stack: ['Python', 'PyTorch', 'RoboFlow'],
+    sourceCode: 'https://github.com/mreagles524/DBD-Killer-AI',
+    livePreview: 'https://universe.roboflow.com/deadbydaylightkillerai/killer_ai_object_detection/model/3',
   },
   {
-    name: 'Project 2',
+    name: 'Deadlift Form Checker (WIP)',
     description:
-      'Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam',
+      'The model will check, based on given video input, as to whether or not the current user has proper form for deadlifts. A side profile is required in order to properly perform inference on.',
     stack: ['SASS', 'TypeScript', 'React'],
-    sourceCode: 'https://github.com',
-    livePreview: 'https://github.com',
-  },
-  {
-    name: 'Project 3',
-    description:
-      'Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam',
-    stack: ['SASS', 'TypeScript', 'React'],
-    sourceCode: 'https://github.com',
-    livePreview: 'https://github.com',
+    sourceCode: 'https://github.com/mreagles524/Gym-Form-Checker',
+    livePreview: 'https://github.com/mreagles524/Gym-Form-Checker',
   },
 ]
 
@@ -60,11 +52,12 @@ const skills = [
   'Software Defined Radios',
   'Git',
   'CI/CD',
+  'MATLAB'
 ]
 
 const contact = {
   // email is optional - if left empty Contact section won't show up
-  email: 'johnsmith@mail.com',
+  email: 'bsaleh524@gmail.com',
 }
 
 export { header, about, projects, skills, contact }
