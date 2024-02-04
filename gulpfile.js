@@ -6,7 +6,7 @@ const wait = require('gulp-wait');
 const babel = require('gulp-babel');;
 const rename = require('gulp-rename');
 
-gulp.task('scripts', function() {
+gulp.task('build', function() {
     return gulp.src('./js/scripts.js')
         .pipe(plumber(plumber({
             errorHandler: function (err) {
