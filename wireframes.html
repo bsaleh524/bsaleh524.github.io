@@ -1,0 +1,1913 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280" />
+<title>Basem Saleh — Portfolio Wireframes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Caveat:wght@400;700&family=Gloria+Hallelujah&family=Architects+Daughter&family=Shadows+Into+Light&family=Special+Elite&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f6f3ec;
+    --paper-2: #efeadd;
+    --rule: #c9c2b1;
+    --muted: #7a7466;
+    --accent: oklch(0.68 0.18 50);
+    --accent-soft: oklch(0.68 0.18 50 / 0.18);
+    --hand: 'Kalam', cursive;
+    --label: 'Patrick Hand', cursive;
+    --note: 'Caveat', cursive;
+    --sans: 'Inter', system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--hand); }
+  body { min-height: 100vh; }
+
+  /* TOP CHROME ---------------------------------------------------------- */
+  .chrome {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--paper);
+    border-bottom: 1.5px dashed var(--rule);
+    padding: 12px 24px 0;
+  }
+  .chrome-top {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap; padding-bottom: 10px;
+  }
+  .chrome-title {
+    font-family: var(--note); font-weight: 700; font-size: 22px; letter-spacing: 0.01em;
+  }
+  .chrome-title small { font-family: var(--label); font-weight: 400; font-size: 13px; color: var(--muted); margin-left: 10px;}
+  .chrome-meta { font-family: var(--label); font-size: 13px; color: var(--muted); }
+  .chrome-meta .dot { color: var(--accent); }
+
+  .tabs {
+    display: flex; gap: 6px; padding-bottom: 0; overflow-x: auto;
+  }
+  .tab {
+    appearance: none; background: transparent; border: 1.5px dashed var(--rule);
+    border-bottom: none; padding: 9px 16px 8px;
+    font-family: var(--label); font-size: 15px; color: var(--muted);
+    border-top-left-radius: 10px 14px; border-top-right-radius: 10px 14px;
+    cursor: default; white-space: nowrap; position: relative; bottom: -1.5px;
+    transform: rotate(-0.2deg);
+  }
+  .tab:nth-child(2n) { transform: rotate(0.3deg); }
+  .tab:nth-child(3n) { transform: rotate(-0.1deg); }
+  .tab[aria-selected="true"] {
+    color: var(--ink); background: var(--paper);
+    border-color: var(--ink); border-bottom: 1.5px solid var(--paper);
+    font-weight: 700;
+  }
+  .tab .num { color: var(--accent); margin-right: 6px; font-weight: 700; }
+
+  /* STAGE --------------------------------------------------------------- */
+  .stage { padding: 28px 24px 80px; }
+  .wf {
+    max-width: 1240px; margin: 0 auto;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    box-shadow: 6px 6px 0 rgba(26,26,26,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .wf::before {
+    /* paper texture via subtle gradient */
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(1200px 800px at 80% -10%, rgba(0,0,0,0.025), transparent 60%),
+      radial-gradient(800px 600px at -10% 90%, rgba(0,0,0,0.03), transparent 60%);
+  }
+  .wf-pin {
+    position: absolute; top: -12px; left: 24px;
+    background: var(--accent); color: #fff;
+    font-family: var(--label); font-size: 12px;
+    padding: 4px 10px; border-radius: 14px;
+    transform: rotate(-3deg);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+    z-index: 2;
+  }
+  .wf-stamp {
+    position: absolute; top: 10px; right: 18px;
+    font-family: var(--note); font-size: 16px; color: var(--muted);
+    transform: rotate(2deg); z-index: 2;
+  }
+
+  /* SHARED WF PRIMITIVES ----------------------------------------------- */
+  .box { border: 1.5px solid var(--ink); padding: 14px; position: relative; background: var(--paper); }
+  .box.dashed { border-style: dashed; }
+  .box.soft { border-color: var(--rule); border-style: dashed; }
+  .box.filled { background: var(--ink); color: var(--paper); }
+  .box.accent { background: var(--accent-soft); border-color: var(--accent); }
+  .placeholder {
+    background:
+      repeating-linear-gradient(135deg, transparent 0 9px, rgba(0,0,0,0.06) 9px 10px);
+    border: 1.5px dashed var(--rule);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-family: var(--label); font-size: 14px;
+    text-align: center; padding: 12px;
+  }
+  .label { font-family: var(--label); font-size: 13px; color: var(--muted); letter-spacing: 0.02em; }
+  .label.up { text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px; }
+  .h-hand { font-family: var(--hand); font-weight: 700; line-height: 1.05; }
+  .body-lo {
+    font-family: var(--sans); font-size: 13px; color: var(--muted); line-height: 1.55;
+    font-weight: 400;
+  }
+  .lorem {
+    height: 8px; background: rgba(26,26,26,0.18); border-radius: 4px; margin: 6px 0;
+  }
+  .lorem.w90 { width: 90%; } .lorem.w80 { width: 80%; } .lorem.w70 { width: 70%; }
+  .lorem.w60 { width: 60%; } .lorem.w50 { width: 50%; } .lorem.w40 { width: 40%; }
+  .lorem.w30 { width: 30%; }
+  .pill {
+    display: inline-flex; align-items: center; padding: 3px 10px;
+    border: 1.5px solid var(--ink); border-radius: 999px;
+    font-family: var(--label); font-size: 13px; background: var(--paper);
+  }
+  .pill.dashed { border-style: dashed; color: var(--muted); }
+  .pill.accent { background: var(--accent); color: white; border-color: var(--accent); }
+  .arrow { color: var(--accent); font-family: var(--note); font-size: 18px; }
+  .note {
+    font-family: var(--note); font-size: 16px; color: var(--accent);
+    transform: rotate(-2deg); display: inline-block;
+  }
+  .note-line {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--note); font-size: 17px; color: var(--accent);
+  }
+  .divider-squiggle {
+    display: block; width: 100%; height: 14px; color: var(--rule);
+  }
+
+  /* SECTION ANCHOR LABEL */
+  .sec-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--label); font-size: 12px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.14em;
+  }
+  .sec-tag::before {
+    content: ""; width: 18px; height: 1.5px; background: var(--accent);
+    display: inline-block;
+  }
+  .sec-h {
+    font-family: var(--hand); font-weight: 700; font-size: 38px; margin: 6px 0 18px;
+    line-height: 1.05;
+  }
+  .sec-h .ink { color: var(--ink); }
+  .sec-h .acc { color: var(--accent); }
+
+  /* WF GRID HELPERS */
+  .row { display: flex; gap: 16px; }
+  .col { display: flex; flex-direction: column; gap: 12px; }
+  .grid { display: grid; gap: 16px; }
+
+  /* annotations (callouts) */
+  .anno {
+    position: absolute; font-family: var(--note); font-size: 15px; color: var(--accent);
+    display: flex; align-items: center; gap: 6px; pointer-events: none;
+    transform: rotate(-2deg);
+  }
+  .anno svg { color: var(--accent); }
+
+  /* HEADERS PER VARIATION ---------------------------------------------- */
+
+  /* V1 — Signal Sweep */
+  .v1 { padding: 0; }
+  .v1-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border-bottom: 1.5px solid var(--ink); }
+  .v1-hero-l { padding: 56px 48px 48px; position: relative; }
+  .v1-hero-r { padding: 28px; border-left: 1.5px dashed var(--rule); display: flex; align-items: center; justify-content: center; position: relative; background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%); }
+  .v1-eyebrow { font-family: var(--label); letter-spacing: 0.2em; text-transform: uppercase; font-size: 12px; color: var(--muted); }
+  .v1-name { font-family: var(--hand); font-weight: 700; font-size: 86px; line-height: 0.95; margin: 6px 0 4px; }
+  .v1-name .acc { color: var(--accent); }
+  .v1-title { font-family: var(--label); font-size: 22px; color: var(--ink); margin-bottom: 18px; }
+  .v1-tag {
+    font-family: var(--hand); font-weight: 300; font-style: italic;
+    font-size: 18px; color: var(--muted); max-width: 460px;
+    border-left: 3px solid var(--accent); padding: 4px 0 4px 14px;
+  }
+  .v1-ctas { display: flex; gap: 12px; margin-top: 22px; align-items: center; }
+  .v1-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border: 1.5px solid var(--ink);
+    font-family: var(--label); font-size: 16px; background: var(--paper);
+  }
+  .v1-cta.solid { background: var(--ink); color: var(--paper); }
+
+  .radar-wrap { position: relative; width: 380px; height: 380px; }
+  .radar-ring { position: absolute; inset: 0; border: 1.5px solid var(--ink); border-radius: 50%; }
+  .radar-ring.d { border-style: dashed; border-color: var(--rule); }
+  .radar-r2 { inset: 12% }
+  .radar-r3 { inset: 26% }
+  .radar-r4 { inset: 40% }
+  .radar-r5 { inset: 54% }
+  .radar-sweep {
+    position: absolute; left: 50%; top: 50%; width: 50%; height: 1.5px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    transform-origin: left center; transform: rotate(-32deg);
+  }
+  .radar-blip {
+    position: absolute; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .radar-cross { position: absolute; inset: 0; }
+  .radar-cross::before, .radar-cross::after {
+    content: ""; position: absolute; background: var(--rule);
+  }
+  .radar-cross::before { left: 0; right: 0; top: 50%; height: 1px; }
+  .radar-cross::after { top: 0; bottom: 0; left: 50%; width: 1px; }
+  .radar-label {
+    position: absolute; font-family: var(--mono); font-size: 10px; color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* sections common */
+  .sec { padding: 56px 48px; border-bottom: 1.5px dashed var(--rule); position: relative; }
+  .sec:last-child { border-bottom: 0; }
+
+  /* timeline */
+  .tl { position: relative; padding-left: 36px; margin-top: 12px; }
+  .tl::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 1.5px; background: var(--ink); }
+  .tl-node {
+    position: relative; margin-bottom: 24px; padding-right: 12px;
+  }
+  .tl-node::before {
+    content: ""; position: absolute; left: -34px; top: 6px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--paper); border: 2px solid var(--ink);
+  }
+  .tl-node.acc::before { background: var(--accent); border-color: var(--accent); }
+  .tl-role { font-family: var(--hand); font-weight: 700; font-size: 22px; line-height: 1.1; }
+  .tl-meta { font-family: var(--label); color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+  .tl-bullets { list-style: none; padding: 0; margin: 0; }
+  .tl-bullets li {
+    font-family: var(--sans); font-size: 13.5px; color: var(--ink);
+    padding-left: 18px; position: relative; line-height: 1.5; margin-bottom: 6px;
+    font-weight: 400;
+  }
+  .tl-bullets li::before {
+    content: "→"; position: absolute; left: 0; color: var(--accent);
+  }
+
+  /* skill cloud */
+  .skill-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* V2 — Constellation */
+  .v2 { background: var(--ink); color: var(--paper); }
+  .v2 .label, .v2 .v2-eyebrow { color: rgba(246,243,236,0.6); }
+  .v2 .box { background: rgba(246,243,236,0.04); border-color: rgba(246,243,236,0.25); color: var(--paper); }
+  .v2 .box.dashed { border-style: dashed; }
+  .v2 .lorem { background: rgba(246,243,236,0.18); }
+  .v2 .placeholder {
+    background: repeating-linear-gradient(135deg, transparent 0 9px, rgba(246,243,236,0.07) 9px 10px);
+    border-color: rgba(246,243,236,0.25); color: rgba(246,243,236,0.5);
+  }
+  .v2 .pill { background: transparent; border-color: rgba(246,243,236,0.45); color: var(--paper); }
+  .v2 .pill.accent { background: var(--accent); border-color: var(--accent); }
+  .v2-hero {
+    position: relative; height: 540px; overflow: hidden;
+    border-bottom: 1.5px solid rgba(246,243,236,0.2);
+  }
+  .v2-net { position: absolute; inset: 0; }
+  .v2-hero-content {
+    position: absolute; inset: 0; display: flex; align-items: flex-end;
+    padding: 48px; justify-content: space-between; gap: 48px;
+    pointer-events: none;
+  }
+  .v2-hero-content > * { pointer-events: auto; }
+  /* Constellation stars - hover, twinkle, pulse */
+  .v2-net .star-grp { cursor: help; }
+  .v2-net .hit { fill: transparent; pointer-events: all; }
+  .v2-net .star {
+    fill: rgba(246,243,236,0.85);
+    transition: r 0.18s ease, fill 0.18s ease;
+    animation: twinkle 4.5s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+    transform-origin: center; transform-box: fill-box;
+  }
+  .v2-net .star-grp.lit .star {
+    fill: oklch(0.82 0.16 80);
+    animation: lit-pulse 2.6s ease-in-out infinite;
+  }
+  .v2-net .star-grp:hover .star,
+  .v2-net .star-grp:focus-within .star {
+    fill: var(--accent);
+    r: 7;
+    animation: none;
+  }
+  .v2-net .lit-glow circle {
+    animation: glow-pulse 2.6s ease-in-out infinite;
+    transform-origin: center; transform-box: fill-box;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+  }
+  @keyframes lit-pulse {
+    0%, 100% { opacity: 0.85; }
+    50%      { opacity: 1; }
+  }
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.25); }
+  }
+  /* Network edges — subtle data-flow current */
+  .v2-net .edges line {
+    stroke-dasharray: 4 10;
+    animation: edge-flow 12s linear infinite;
+  }
+  @keyframes edge-flow {
+    to { stroke-dashoffset: -140; }
+  }
+  /* Travelling pulses on the edges that touch a lit node */
+  .v2-net .pulse {
+    fill: var(--accent);
+    filter: drop-shadow(0 0 4px oklch(0.82 0.16 80));
+  }
+  .star-tip {
+    position: fixed; z-index: 100;
+    max-width: 320px; min-width: 220px;
+    padding: 14px 16px;
+    background: var(--paper); color: var(--ink);
+    border: 1.5px solid var(--accent);
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.25);
+    pointer-events: none; opacity: 0;
+    transform: translate(14px, 18px) translateY(4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    font-family: var(--label);
+  }
+  .star-tip.show { opacity: 1; transform: translate(14px, 18px) translateY(0); }
+  .star-tip .tip-cat {
+    display: inline-block; font-size: 10px; letter-spacing: 0.18em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 4px;
+  }
+  .star-tip .tip-label {
+    font-family: var(--hand); font-weight: 700; font-size: 18px;
+    line-height: 1.15; margin-bottom: 6px; color: var(--ink);
+  }
+  .star-tip .tip-body {
+    font-family: var(--sans);
+    font-size: 12.5px; line-height: 1.55; color: var(--ink);
+    font-weight: 400;
+  }
+  .star-hint {
+    position: absolute; left: 50%; bottom: 36px;
+    transform: translateX(-50%);
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--note); font-size: 22px; color: var(--accent);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .star-hint .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px oklch(0.82 0.16 80 / 0.18); }
+  .v2-name {
+    font-family: var(--hand); font-weight: 700; font-size: 110px; line-height: 0.88;
+    color: var(--paper);
+  }
+  .v2-name .acc { color: var(--accent); }
+  .v2-tag-r {
+    max-width: 320px; text-align: right; align-self: flex-end;
+  }
+  .v2-tag-r .label.up { color: var(--accent); }
+  .v2-tag-r .quote {
+    font-family: var(--hand); font-style: italic; font-weight: 300; font-size: 18px;
+    color: rgba(246,243,236,0.9); margin-top: 6px;
+  }
+  .v2-tl { position: absolute; top: 28px; left: 48px; display: flex; gap: 24px; align-items: center; }
+  /* faded vertical timeline rail behind the experience stack */
+  .exp-stack::before {
+    content: "";
+    position: absolute;
+    left: 48px; top: -8px; bottom: -8px;
+    width: 0;
+    border-left: 3px dashed rgba(246, 243, 236, 0.28);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .exp-stack > .box {
+    position: relative; z-index: 1;
+    background: #122438;
+    border-color: rgba(246, 243, 236, 0.3);
+  }
+  .v2-tl .pill { color: var(--paper); border-color: rgba(246,243,236,0.45); }
+  .v2-tl .pill.accent { background: var(--accent); border-color: var(--accent); }
+
+  .v2 .sec { border-bottom-color: rgba(246,243,236,0.15); }
+  .v2 .tl::before { background: rgba(246,243,236,0.3); }
+  .v2 .tl-node::before { background: var(--ink); border-color: rgba(246,243,236,0.5); }
+  .v2 .tl-node.acc::before { background: var(--accent); border-color: var(--accent); }
+  .v2 .tl-bullets li { color: rgba(246,243,236,0.85); }
+
+  /* V3 — Editorial Mark */
+  .v3 { background: var(--paper); }
+  .v3-hero {
+    display: grid; grid-template-columns: 1fr 1fr; align-items: stretch;
+    border-bottom: 1.5px solid var(--ink);
+    min-height: 480px;
+  }
+  .v3-hero-l {
+    padding: 48px; display: flex; flex-direction: column; justify-content: space-between;
+    border-right: 1.5px solid var(--ink);
+  }
+  .v3-hero-r {
+    padding: 24px; display: flex; align-items: center; justify-content: center;
+    background: var(--paper-2); position: relative;
+  }
+  .v3-kicker { font-family: var(--label); letter-spacing: 0.3em; font-size: 11px; text-transform: uppercase; color: var(--muted); }
+  .v3-name {
+    font-family: var(--hand); font-weight: 700; font-size: 110px; line-height: 0.88;
+    margin: 14px 0 10px;
+    /* serif-ish via italic + tracking */
+  }
+  .v3-name .underline { display: inline-block; background: linear-gradient(transparent 70%, var(--accent) 70%, var(--accent) 88%, transparent 88%); padding: 0 4px; }
+  .v3-meta-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    border-top: 1.5px dashed var(--rule); padding-top: 18px; margin-top: 18px;
+  }
+  .v3-meta-cell .v3-num { font-family: var(--hand); font-weight: 700; font-size: 30px; color: var(--accent); }
+  .v3-meta-cell .label { font-size: 12px; }
+
+  /* scarab geometric */
+  .scarab { width: 320px; height: 380px; position: relative; }
+
+  /* V3 sec */
+  .v3-sec { display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 56px 48px; border-bottom: 1.5px solid var(--ink); }
+  .v3-sec:last-child { border-bottom: 0; }
+  .v3-marg { position: sticky; top: 90px; align-self: start; }
+  .v3-marg .sec-h { font-size: 28px; margin: 8px 0; }
+  .v3-marg .body-lo { margin-top: 14px; }
+  .v3-marg .note { font-size: 17px; }
+  .v3-content { min-width: 0; }
+
+  /* V4 — Cluster Resolve / Bento */
+  .v4-hero {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 0;
+    border-bottom: 1.5px solid var(--ink);
+    min-height: 420px;
+  }
+  .v4-hero-l { padding: 44px 40px; display: flex; flex-direction: column; gap: 14px; justify-content: center; border-right: 1.5px dashed var(--rule); }
+  .v4-hero-r { padding: 24px; display: flex; align-items: center; justify-content: center; background: var(--paper-2); position: relative; }
+  .v4-name { font-family: var(--hand); font-weight: 700; font-size: 68px; line-height: 0.95; }
+  .v4-bento {
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 110px;
+    padding: 40px;
+  }
+  .v4-bento .box { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .b-1 { grid-column: span 3; grid-row: span 2; }
+  .b-2 { grid-column: span 3; grid-row: span 1; }
+  .b-3 { grid-column: span 3; grid-row: span 1; }
+  .b-4 { grid-column: span 2; grid-row: span 2; }
+  .b-5 { grid-column: span 2; grid-row: span 1; }
+  .b-6 { grid-column: span 2; grid-row: span 1; }
+  .b-7 { grid-column: span 4; grid-row: span 1; }
+
+  /* V5 — Split Frame */
+  .v5 { display: grid; grid-template-columns: 320px 1fr; min-height: 100%; }
+  .v5-rail {
+    border-right: 1.5px solid var(--ink);
+    padding: 36px 28px; position: sticky; top: 0; align-self: start;
+    background: var(--paper-2);
+    height: auto;
+  }
+  .v5-name { font-family: var(--hand); font-weight: 700; font-size: 38px; line-height: 1; margin: 14px 0 2px; }
+  .v5-title { font-family: var(--label); font-size: 16px; color: var(--ink); margin-bottom: 18px; }
+  .v5-sig {
+    width: 100%; aspect-ratio: 1/1; border: 1.5px dashed var(--rule);
+    margin: 14px 0 20px; position: relative; overflow: hidden;
+    background: var(--paper);
+  }
+  .v5-nav { display: flex; flex-direction: column; gap: 6px; margin-top: 18px; }
+  .v5-nav a {
+    font-family: var(--label); font-size: 15px; color: var(--muted);
+    text-decoration: none; padding: 4px 0;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .v5-nav a::before {
+    content: ""; width: 14px; height: 1.5px; background: var(--rule);
+  }
+  .v5-nav a.curr { color: var(--ink); font-weight: 700; }
+  .v5-nav a.curr::before { background: var(--accent); width: 28px; }
+  .v5-contact { margin-top: 22px; padding-top: 18px; border-top: 1.5px dashed var(--rule); display: flex; flex-direction: column; gap: 4px; font-family: var(--mono); font-size: 12px; color: var(--ink); }
+  .v5-contact a { color: var(--ink); text-decoration: none; }
+  .v5-contact a:hover { color: var(--accent); }
+  .v5-main { padding: 0; }
+  .v5 .sec { padding: 56px 56px; border-bottom: 1.5px dashed var(--rule); }
+  .v5 .sec:last-child { border-bottom: 0; }
+
+  /* PROJECT CARDS */
+  .proj-card {
+    border: 1.5px solid var(--ink); padding: 18px; background: var(--paper);
+    display: flex; flex-direction: column; gap: 10px; position: relative;
+  }
+  .proj-card .proj-art {
+    height: 160px;
+    background: repeating-linear-gradient(135deg, transparent 0 9px, rgba(0,0,0,0.06) 9px 10px);
+    border: 1.5px dashed var(--rule);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-family: var(--label);
+    margin-bottom: 6px;
+  }
+  .proj-title { font-family: var(--hand); font-weight: 700; font-size: 22px; line-height: 1.1; }
+  .proj-status {
+    display: inline-block; padding: 2px 8px; border-radius: 999px;
+    background: var(--accent-soft); color: var(--ink);
+    font-family: var(--label); font-size: 12px;
+    border: 1px solid var(--accent);
+  }
+  .proj-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+  .proj-links a {
+    font-family: var(--mono); font-size: 11px; color: var(--ink);
+    border: 1px dashed var(--rule); padding: 3px 8px; text-decoration: none;
+  }
+
+  /* footer */
+  .foot {
+    padding: 40px 48px; background: var(--ink); color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    flex-wrap: wrap;
+  }
+  .foot .v2-hf, .foot .foot-line {
+    font-family: var(--hand); font-weight: 300; font-size: 22px; max-width: 420px;
+  }
+  .foot a { color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 13px; display: block; }
+  .foot a + a { margin-top: 4px; }
+
+  /* tweaks panel injects */
+  .twk-swatch { width: 18px; height: 18px; border-radius: 50%; display: inline-block; vertical-align: middle; margin-right: 6px; }
+
+  /* hidden by default */
+  .wf[hidden] { display: none; }
+
+  /* annotation callouts on the wireframe edges */
+  .callout {
+    position: absolute; display: flex; gap: 6px; align-items: flex-start;
+    font-family: var(--note); color: var(--accent); font-size: 16px; max-width: 200px;
+    pointer-events: none; line-height: 1.15;
+  }
+  .callout .arr {
+    font-size: 22px; line-height: 1; transform: translateY(-3px);
+  }
+
+  /* responsive cap */
+  @media (max-width: 1100px) {
+    .v1-hero, .v3-hero, .v4-hero { grid-template-columns: 1fr; }
+    .v3-sec, .v5 { grid-template-columns: 1fr; }
+    .v4-bento { grid-template-columns: repeat(3, 1fr); }
+    .b-1, .b-2, .b-3, .b-4, .b-5, .b-6, .b-7 { grid-column: span 3; }
+  }
+</style>
+</head>
+<body>
+
+<div class="chrome">
+  <div class="chrome-top">
+    <div class="chrome-title">Basem Saleh — portfolio wireframes <small>5 directions · low-fi · for review</small></div>
+    <div class="chrome-meta">brief · <span class="dot">single-page · scroll-anchored · github pages</span></div>
+  </div>
+  <div class="tabs" role="tablist" id="tabs">
+    <button class="tab" role="tab" data-i="0"><span class="num">01</span>Signal Sweep</button>
+    <button class="tab" role="tab" data-i="1" aria-selected="true"><span class="num">02</span>Constellation ★</button>
+    <button class="tab" role="tab" data-i="2"><span class="num">03</span>Editorial Mark</button>
+    <button class="tab" role="tab" data-i="3"><span class="num">04</span>Cluster · Bento</button>
+    <button class="tab" role="tab" data-i="4"><span class="num">05</span>Split Frame</button>
+  </div>
+</div>
+
+<div class="stage" id="stage">
+
+  <!-- =================================================================== -->
+  <!-- V1 — Signal Sweep                                                  -->
+  <!-- =================================================================== -->
+  <section class="wf v1" data-i="0" hidden>
+    <div class="wf-pin">01 · Signal Sweep</div>
+    <div class="wf-stamp">centered · classic stack · timeline</div>
+
+    <!-- HERO -->
+    <div class="v1-hero">
+      <div class="v1-hero-l">
+        <div class="v1-eyebrow">Portfolio · 2026</div>
+        <h1 class="v1-name">Basem<br/><span class="acc">Saleh</span>.</h1>
+        <div class="v1-title">Machine Learning Engineer</div>
+        <div class="v1-tag">I build models that solve hard problems in signal &amp; vision. Sometimes I also teach them to play video games.</div>
+        <div class="v1-ctas">
+          <a class="v1-cta solid">View my work →</a>
+          <a class="v1-cta">Resume (PDF)</a>
+          <span class="note-line">↑ scroll anchor</span>
+        </div>
+        <div class="callout" style="bottom:24px;left:48px;"><span class="arr">↗</span><span>punchy 1-line tagline · bridge engineering ↔ creative</span></div>
+      </div>
+      <div class="v1-hero-r">
+        <div class="radar-wrap" aria-label="radar signature">
+          <div class="radar-cross"></div>
+          <div class="radar-ring"></div>
+          <div class="radar-ring d radar-r2"></div>
+          <div class="radar-ring d radar-r3"></div>
+          <div class="radar-ring d radar-r4"></div>
+          <div class="radar-ring d radar-r5"></div>
+          <div class="radar-sweep"></div>
+          <div class="radar-blip" style="left:62%;top:32%"></div>
+          <div class="radar-blip" style="left:38%;top:64%;width:6px;height:6px"></div>
+          <div class="radar-blip" style="left:71%;top:58%;width:5px;height:5px"></div>
+          <div class="radar-label" style="left:50%;top:-18px;transform:translateX(-50%)">N · 0°</div>
+          <div class="radar-label" style="right:-18px;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:left">E · 90°</div>
+        </div>
+        <div class="callout" style="top:18px;right:18px;text-align:right;"><span>signature element — animated radar sweep · canvas/SVG · nods to DSP work</span><span class="arr">↘</span></div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="sec">
+      <div class="sec-tag">02 · About</div>
+      <div class="sec-h"><span class="ink">A short story.</span></div>
+      <div class="row" style="align-items:flex-start; gap:48px;">
+        <div class="col" style="flex:1.4;">
+          <div class="body-lo" style="font-family:var(--hand); font-size:20px; font-weight:300; line-height:1.45; color:var(--ink); max-width: 640px;">
+            First-gen Egyptian-American, youngest of three. Pursuing a part-time MS in AI at <u>Johns Hopkins</u> while holding down a defense ML role; BS in Electrical Engineering from <u>Drexel</u>. <span style="color:var(--accent);">Part mountain — part indoor hobbyist.</span> Hiker, snowboarder, photographer, gamer.
+          </div>
+          <div style="margin-top:22px;" class="label up">Skills · stack</div>
+          <div class="skill-cloud" style="margin-top:10px;">
+            <span class="pill">Python</span><span class="pill">PyTorch</span><span class="pill">Machine Learning</span>
+            <span class="pill">Computer Vision</span><span class="pill">Signal Processing</span><span class="pill dashed">C++</span>
+            <span class="pill dashed">C#</span><span class="pill dashed">MATLAB</span><span class="pill">AWS</span>
+            <span class="pill">Docker</span><span class="pill">CI/CD</span><span class="pill">Object Detection</span>
+          </div>
+        </div>
+        <div class="col" style="flex:1; min-width:260px;">
+          <div class="placeholder" style="height:240px;">[ portrait or workspace photo ]</div>
+          <div class="label" style="text-align:center;">optional — recruiter-friendly portrait</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="sec">
+      <div class="sec-tag">03 · Experience</div>
+      <div class="sec-h"><span class="ink">Lockheed Martin</span> <span class="note" style="font-size:22px;">— three chapters →</span></div>
+      <div class="tl">
+        <div class="tl-node acc">
+          <div class="tl-role">Machine Learning Engineer <span class="proj-status" style="margin-left:8px;">current</span></div>
+          <div class="tl-meta">defense · DSP · vision · pytorch</div>
+          <ul class="tl-bullets">
+            <li>Secured $1M+ in funding · real-time DSP ML for frequency classification</li>
+            <li>Spearheaded scheduling-estimation model adopted as internal product</li>
+            <li>Authored internal whitepaper · object detectors vs. classifiers in wideband signal</li>
+            <li>Built supervised classifier for real-time UAV signal-type ID</li>
+            <li>+37% accuracy on pneumonia classifier via custom end-to-end pipeline</li>
+            <li>Documented S3 usage patterns for ML data pipelines</li>
+          </ul>
+        </div>
+        <div class="tl-node">
+          <div class="tl-role">Software Engineering Researcher</div>
+          <div class="tl-meta">5G · SDR · CI/CD</div>
+          <ul class="tl-bullets">
+            <li>Compile time 1h → 8min via automated GitLab CI/CD</li>
+            <li>C++ to control SDRs on custom 5G nodes</li>
+            <li>+400% radio transmission range — antenna freq. optimization</li>
+            <li>Python-based Docker traffic-monitoring tool</li>
+          </ul>
+        </div>
+        <div class="tl-node">
+          <div class="tl-role">Software Engineer</div>
+          <div class="tl-meta">radar · matlab · c#</div>
+          <ul class="tl-bullets">
+            <li>Calibration data analysis · customer radar readiness (MATLAB)</li>
+            <li>$70K+ saved · refactored legacy radar error model</li>
+            <li>Panel calibration 1 day → 10 min via C# automation</li>
+            <li>S-parameter collection &amp; analysis · validation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout" style="right:24px;top:80px"><span>vertical timeline · accent dot = current role</span><span class="arr">↘</span></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="sec">
+      <div class="sec-tag">04 · Projects</div>
+      <div class="sec-h"><span class="ink">What I'm building.</span></div>
+      <div class="grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="proj-card">
+          <div class="proj-art">[ killer-cam · gameplay capture · DEEPSort overlay ]</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="proj-title">AI Game Agent — Dead by Daylight</div>
+            <span class="proj-status">WIP</span>
+          </div>
+          <div class="body-lo">Computer vision + DEEPSort tracking controls the "Killer" role. Commands sent via external radio interface → Bluetooth keyboard controller.</div>
+          <div class="proj-links"><a>github →</a><a>roboflow demo →</a><a>youtube · TBD</a></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-art">[ side-view deadlift · keypoint overlay ]</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="proj-title">Deadlift Form Checker</div>
+            <span class="proj-status">WIP</span>
+          </div>
+          <div class="body-lo">Real-time form prediction from side-view video. Continuous inference on a streaming feed.</div>
+          <div class="proj-links"><a>github · coming soon</a></div>
+        </div>
+        <div class="proj-card soft" style="border-style:dashed; opacity:0.7;">
+          <div class="proj-art" style="height:80px;">[ slot reserved · future project ]</div>
+          <div class="proj-title" style="color:var(--muted);">future project</div>
+          <div class="body-lo">Leave room for 1–2 more — grid expands.</div>
+        </div>
+        <div class="proj-card soft" style="border-style:dashed; opacity:0.7;">
+          <div class="proj-art" style="height:80px;">[ slot reserved · future project ]</div>
+          <div class="proj-title" style="color:var(--muted);">future project</div>
+          <div class="body-lo">Tag with topic chips (CV · DSP · agent · tool).</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="sec">
+      <div class="sec-tag">05 · Education</div>
+      <div class="row" style="gap:24px;">
+        <div class="box" style="flex:1;">
+          <div class="label up">In progress</div>
+          <div class="h-hand" style="font-size:24px;margin-top:4px;">MS · Artificial Intelligence</div>
+          <div class="body-lo">Johns Hopkins University · part-time</div>
+        </div>
+        <div class="box dashed" style="flex:1;">
+          <div class="label up">Completed</div>
+          <div class="h-hand" style="font-size:24px;margin-top:4px;">BS · Electrical Engineering</div>
+          <div class="body-lo">Drexel University</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="foot">
+      <div class="foot-line">Open to full-time opportunities.<br/><span style="color:var(--accent);">Say hello.</span></div>
+      <div>
+        <a>bsaleh524@gmail.com →</a>
+        <a>github.com/bsaleh524 →</a>
+        <a>linkedin.com/in/basem-saleh →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- V2 — Constellation (dark · asymmetric magazine)                     -->
+  <!-- =================================================================== -->
+  <section class="wf v2" data-i="1">
+    <div class="wf-pin">02 · Constellation</div>
+    <div class="wf-stamp" style="color:rgba(246,243,236,0.55);">dark · neural net hero · offset cards</div>
+
+    <div class="v2-hero">
+      <svg class="v2-net" viewBox="0 0 1200 540" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="oklch(0.78 0.16 50)" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="oklch(0.78 0.16 50)" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g class="edges" stroke="rgba(246,243,236,0.18)" stroke-width="0.7" fill="none">
+          <!-- edges (precomputed-ish) -->
+          <line x1="180" y1="120" x2="420" y2="80"/>
+          <line x1="180" y1="120" x2="320" y2="240"/>
+          <line x1="420" y1="80" x2="600" y2="180"/>
+          <line x1="420" y1="80" x2="540" y2="320"/>
+          <line x1="320" y1="240" x2="540" y2="320"/>
+          <line x1="320" y1="240" x2="480" y2="420"/>
+          <line x1="600" y1="180" x2="780" y2="100"/>
+          <line x1="600" y1="180" x2="820" y2="280"/>
+          <line x1="540" y1="320" x2="720" y2="380"/>
+          <line x1="540" y1="320" x2="820" y2="280"/>
+          <line x1="780" y1="100" x2="980" y2="160"/>
+          <line x1="780" y1="100" x2="1060" y2="60"/>
+          <line x1="820" y1="280" x2="1020" y2="340"/>
+          <line x1="720" y1="380" x2="1020" y2="340"/>
+          <line x1="720" y1="380" x2="640" y2="460"/>
+          <line x1="480" y1="420" x2="640" y2="460"/>
+          <line x1="980" y1="160" x2="1060" y2="60"/>
+          <line x1="980" y1="160" x2="1020" y2="340"/>
+          <line x1="180" y1="120" x2="120" y2="320"/>
+          <line x1="120" y1="320" x2="320" y2="240"/>
+          <line x1="120" y1="320" x2="240" y2="460"/>
+          <line x1="240" y1="460" x2="480" y2="420"/>
+        </g>
+        <g class="pulses">
+          <!-- pulses travel TOWARD the 4 lit headliner nodes; staggered so the field feels alive -->
+          <!-- → $1M+ (600,180) -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="420;600" dur="4.2s" begin="0s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="80;180"  dur="4.2s" begin="0s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4.2s" begin="0s" repeatCount="indefinite"/>
+          </circle>
+          <!-- → RAG (540,320) -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="820;540" dur="5.0s" begin="0.8s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="280;320" dur="5.0s" begin="0.8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="5.0s" begin="0.8s" repeatCount="indefinite"/>
+          </circle>
+          <!-- → AI Gov (320,240) -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="120;320" dur="4.6s" begin="1.6s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="320;240" dur="4.6s" begin="1.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4.6s" begin="1.6s" repeatCount="indefinite"/>
+          </circle>
+          <!-- → KubeFlow (780,100) -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="1060;780" dur="5.4s" begin="2.4s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="60;100"   dur="5.4s" begin="2.4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="5.4s" begin="2.4s" repeatCount="indefinite"/>
+          </circle>
+          <!-- → KubeFlow (780,100) from below -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="980;780" dur="4.8s" begin="3.2s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="160;100" dur="4.8s" begin="3.2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4.8s" begin="3.2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- → AI Gov (320,240) from upper left -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="180;320" dur="4.0s" begin="4.0s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="120;240" dur="4.0s" begin="4.0s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4.0s" begin="4.0s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+        <g fill="rgba(246,243,236,0.85)" class="stars-g">
+          <g class="star-grp" data-label="Kalman filter target tracker" data-body="JAX-based Kalman filter as a fighter-jet payload — gives the RL agent a continuous, low-noise multi-target observation space even when on-board radar loses focus." data-cat="ML">
+            <circle class="hit" cx="180" cy="120" r="16"/>
+            <circle class="star" cx="180" cy="120" r="3" style="--d:0s"/>
+          </g>
+          <g class="star-grp" data-label="Multi-agent RL · 20% faster missions" data-body="Trained MLP-based multi-agent RL in JAX with bespoke reward shaping. Achieved 20% faster mission completion than a deterministic baseline through learned cooperative behavior." data-cat="ML">
+            <circle class="hit" cx="420" cy="80" r="16"/>
+            <circle class="star" cx="420" cy="80" r="3" style="--d:0.6s"/>
+          </g>
+          <g class="star-grp lit" data-label="AI Governance framework" data-body="Primary author on a 3-person team — translated DoD 3000.09, corporate AI policy, and the 5 AI ethical principles into a compliance matrix, review-board charter, and tiered escalation process. Accepted; rolling out across high-impact AI programs." data-cat="STRAT">
+            <circle class="hit" cx="320" cy="240" r="18"/>
+            <circle class="star" cx="320" cy="240" r="4"/>
+          </g>
+          <g class="star-grp lit" data-label="$1M+ funding · RF classifier" data-body="ResNet50 in PyTorch trained on field-collected IQ spectrograms; exported to ONNX and deployed on radio hardware for real-time inference. 98% accuracy on customer signatures — contributed directly to Phase 2 funding." data-cat="ML">
+            <circle class="hit" cx="600" cy="180" r="18"/>
+            <circle class="star" cx="600" cy="180" r="4"/>
+          </g>
+          <g class="star-grp lit" data-label="LLM · RAG Cameo assistant" data-body="Stood up Weaviate on the production endpoint and curated the retrieval corpus (block-creation instructions, architecture standards) for a hackathon LLM that drops standards-compliant Cameo architectures straight into engineers' workspaces." data-cat="LLM">
+            <circle class="hit" cx="540" cy="320" r="18"/>
+            <circle class="star" cx="540" cy="320" r="4"/>
+          </g>
+          <g class="star-grp lit" data-label="KubeFlow + LakeFS · 1d → 1h" data-body="Led automation of the AFSIM mission-sim + data pipeline. Ported the headless AFSIM image from RHEL to Ubuntu for our MLOps stack, added a GPU plugin, wired KubeFlow with LakeFS auto-transfer. One-day manual run → 1-hour hands-off." data-cat="MLOPS">
+            <circle class="hit" cx="780" cy="100" r="18"/>
+            <circle class="star" cx="780" cy="100" r="4"/>
+          </g>
+          <g class="star-grp" data-label="JAX radar detection · adopted by 2–3 programs" data-body="Physics-based radar detection in JAX — two-stage geometric (az/el/range/horizon) + SNR power detection, ECEF→body-frame conversion. Per-target SNR / az / el at every RL timestep. Adopted by multiple programs; foundational to a multi-drone sim that secured Phase 2 funding." data-cat="ML">
+            <circle class="hit" cx="820" cy="280" r="16"/>
+            <circle class="star" cx="820" cy="280" r="3" style="--d:1.1s"/>
+          </g>
+          <g class="star-grp" data-label="Jira story-point regressor" data-body="2-person capstone in LM's internal AI apprenticeship: regression on ticket metadata + team labels for Jira point estimation. Adopted by the business area into their actual estimation workflow." data-cat="ML">
+            <circle class="hit" cx="720" cy="380" r="16"/>
+            <circle class="star" cx="720" cy="380" r="3" style="--d:0.3s"/>
+          </g>
+          <g class="star-grp" data-label="Detectors vs classifiers · whitepaper" data-body="DETR vs EfficientNet on wideband signal datasets (TorchSig) — structured benchmark + literature survey. Internal whitepaper now part of the team's lit-reviews for DSP architecture decisions." data-cat="ML">
+            <circle class="hit" cx="980" cy="160" r="16"/>
+            <circle class="star" cx="980" cy="160" r="3" style="--d:2.4s"/>
+          </g>
+          <g class="star-grp" data-label="IQ Classifier · 95% on UAV signals" data-body="Dockerized Big-Iron-compatible app with plug-and-play ONNX models. PyTorch classifier on 5–6 wideband UAV signal types, swapped via ActiveMQ topics. 95% accuracy — still actively used." data-cat="ML">
+            <circle class="hit" cx="1060" cy="60" r="16"/>
+            <circle class="star" cx="1060" cy="60" r="3" style="--d:1.5s"/>
+          </g>
+          <g class="star-grp" data-label="GitLab CI/CD · 1h → 8min" data-body="Built a from-scratch CI/CD on the vendor's Docker container — compile, Valgrind memory checks, then re-used the container in a HW-emulated test stage. Full build+test cycle dropped from over an hour to 8 minutes." data-cat="MLOPS">
+            <circle class="hit" cx="1020" cy="340" r="16"/>
+            <circle class="star" cx="1020" cy="340" r="3" style="--d:0.9s"/>
+          </g>
+          <g class="star-grp" data-label="Keyboard Keystroke Predictions — paper" data-body="Extended an acoustic side-channel attack paper to mechanical keyboards. Built a custom data-collection rig + multi-switch dataset; modified CoAtNet into a fusion architecture ingesting Mel-spectrogram audio + tabular keyboard metadata. 96%+ accuracy on single-key binary classification across three switch types." data-cat="PAPER">
+            <circle class="hit" cx="480" cy="420" r="16"/>
+            <circle class="star" cx="480" cy="420" r="3" style="--d:2.1s"/>
+          </g>
+          <g class="star-grp" data-label="AI Game Agent — Dead by Daylight" data-body="Computer-vision pipeline using a custom-labeled YOLOv8 dataset (annotated via Roboflow) and OCR text detection. Hardware inputs automate in-game responses in real time — currently pivoting to a lighter-weight architecture." data-cat="CV / PROJECT">
+            <circle class="hit" cx="640" cy="460" r="16"/>
+            <circle class="star" cx="640" cy="460" r="3" style="--d:1.0s"/>
+          </g>
+          <g class="star-grp" data-label="Youtube Galaxy — 3D creator viz" data-body="End-to-end NLP pipeline that scrapes YouTube creator data, embeds with all-MiniLM-L6-v2, clusters ~120 creator communities via t-SNE + K-means, names clusters with Gemini Pro, and serves results as a live 3D Plotly viz on Streamlit Cloud." data-cat="NLP / PROJECT">
+            <circle class="hit" cx="120" cy="320" r="16"/>
+            <circle class="star" cx="120" cy="320" r="3" style="--d:0.4s"/>
+          </g>
+          <g class="star-grp" data-label="Chaos Coding Agents" data-body="Multiple coding agents working in parallel on the same repo — exploring chaos-engineering ideas for agent swarms. Diverging task trees, conflict resolution, and orchestration patterns." data-cat="AGENT / PROJECT">
+            <circle class="hit" cx="240" cy="460" r="16"/>
+            <circle class="star" cx="240" cy="460" r="3" style="--d:2.8s"/>
+          </g>
+        </g>
+        <g class="lit-glow">
+          <circle cx="600" cy="180" r="10" fill="url(#nodeGlow)"/>
+          <circle cx="320" cy="240" r="10" fill="url(#nodeGlow)"/>
+          <circle cx="780" cy="100" r="10" fill="url(#nodeGlow)"/>
+          <circle cx="540" cy="320" r="10" fill="url(#nodeGlow)"/>
+        </g>
+      </svg>
+
+      <div class="v2-tl"></div>
+
+      <div class="v2-hero-content">
+        <div>
+          <div class="v2-name"><span class="acc">B</span>asem<br/><span class="acc">S</span>aleh</div>
+          <div class="label up" style="color:var(--accent); margin-top:8px; font-size:14px; letter-spacing: 0.16em;">— machine learning engineer</div>
+        </div>
+        <div class="v2-tag-r">
+          <div class="label up">— endorsement</div>
+          <div class="quote" style="font-size:20px; line-height:1.4;">"I only wish to keep working with him."</div>
+          <div class="label" style="font-size:13px; color:rgba(246,243,236,0.55); margin-top:4px;">— former teammate, Lockheed Martin</div>
+          <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px; align-items:flex-end;">
+            <div style="display:flex; gap:8px;">
+              <a href="#v2-experience" class="pill accent" style="text-decoration:none;">View Experience ↓</a>
+              <a href="#v2-projects" class="pill" style="text-decoration:none;">View Projects ↓</a>
+            </div>
+            <a href="resume.pdf" style="font-family: var(--label); font-size: 14px; color: rgba(246,243,236,0.75); text-decoration: underline; text-underline-offset: 3px;">↓ Download Resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="callout" style="top:24px;right:240px;"><span style="color:#fff;">15 stars · hover any to surface a bullet or project · the 4 bright ones are headliners</span><span class="arr" style="color:var(--accent);">↘</span></div>
+      <div class="star-hint"><span class="dot"></span><span>hover a star → see a project</span></div>
+    </div>
+
+    <!-- ABOUT — split panel -->
+    <section class="sec">
+      <div class="sec-tag" style="color:rgba(246,243,236,0.5);">02 · about</div>
+      <div class="sec-h"><span style="color:var(--paper);">in three breaths.</span></div>
+      <div class="row" style="gap:48px; align-items:flex-start; margin-top:8px;">
+        <div style="flex:0 0 320px;">
+          <image-slot id="v2-portrait" style="width:100%; height:280px; display:block;" shape="rounded" radius="4" placeholder="Drop a portrait"></image-slot>
+        </div>
+        <div style="flex:1; max-width:680px;">
+          <div style="font-family:var(--hand); font-weight:300; font-size:22px; line-height:1.55; color:var(--paper);">
+            <span style="color:var(--accent);">ML Engineer that snowboards, hikes, games, and makes fun projects at home.</span><br/>
+            <span style="opacity:0.75;">Masters in AI from Johns Hopkins University.</span><br/>
+            <span style="opacity:0.75;">Bachelor's in Electrical Engineering from Drexel University.</span>
+          </div>
+          <div style="margin-top:28px; display:flex; flex-wrap:wrap; gap:8px;">
+            <span class="pill accent">PyTorch</span>
+            <span class="pill">Python</span><span class="pill">Computer Vision</span><span class="pill">Signal Processing</span>
+            <span class="pill">Machine Learning</span><span class="pill">Object Detection</span>
+            <span class="pill">C++</span><span class="pill">C#</span><span class="pill">MATLAB</span>
+            <span class="pill">AWS</span><span class="pill">Docker</span><span class="pill">CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE — offset stacked cards -->
+    <section class="sec" id="v2-experience">
+      <div class="sec-tag" style="color:rgba(246,243,236,0.5);">03 · experience</div>
+      <div class="sec-h"><span style="color:var(--paper);">seven years · </span><span style="color:var(--accent);">one company · four roles.</span></div>
+
+      <div class="exp-stack" style="display:flex; flex-direction:column; gap:24px; margin-top:14px; position:relative;">
+
+        <!-- ROLE 1 — ML Engineer (current) -->
+        <div class="box" style="margin-right:18%; padding:22px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+            <div class="h-hand" style="font-size:26px;">Machine Learning Engineer <span class="pill accent" style="font-size:11px; padding:2px 8px;">current</span></div>
+            <div class="label">Lockheed Martin · RL Arena · Moorestown, NJ · Aug '24 — now</div>
+          </div>
+          <ul class="tl-bullets" style="margin-top:10px;">
+            <li>Designed a JAX Kalman-filter tracker as a fighter-jet payload — feeds the RL observation space with low-noise multi-target state estimates</li>
+            <li>Trained a multi-agent MLP RL system in JAX — <b>20% faster mission completion</b> vs. deterministic baseline via learned cooperation</li>
+            <li>Built a configurable physics-based radar detection model in JAX (two-stage geometric + SNR, ECEF→body frame) — <b>adopted by 2–3 programs</b>, foundational to multi-drone sim that secured Phase 2 funding</li>
+            <li>Stood up Weaviate + curated retrieval corpus for a hackathon RAG assistant that generates standards-compliant Cameo architectures into engineers' workspaces</li>
+            <li>Designed the Mission Manager constraint-satisfaction algorithm for the UMMA autonomous naval system — auditable go/no-go mission feasibility</li>
+            <li>Primary author on a 3-person team for the business area's <b>AI governance framework</b> — DoD 3000.09, corporate AI policy, 5 ethical principles · accepted &amp; rolling out across high-impact programs</li>
+            <li>Led KubeFlow + LakeFS automation of the AFSIM simulation + data pipeline — <b>1-day manual run → 1-hour hands-off</b>, parallel runs without oversight</li>
+          </ul>
+        </div>
+
+        <!-- ROLE 2 — AI Engineer (absorbed Spectrum Lab work) -->
+        <div class="box" style="margin-left:24%; padding:22px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+            <div class="h-hand" style="font-size:24px;">AI Engineer</div>
+            <div class="label">Lockheed Martin · Moorestown + Cherry Hill, NJ · Nov '22 — Aug '24</div>
+          </div>
+          <ul class="tl-bullets" style="margin-top:10px;">
+            <li>Helped <b>secure $1M+ in Phase-2 funding</b> — ResNet50 RF classifier in PyTorch → ONNX, deployed to radio HW for live inference · 98% accuracy on customer-collected IQ</li>
+            <li>Led 2-person capstone on a Jira story-point regressor from ticket metadata + team labels — <b>adopted into the business area's actual estimation workflow</b></li>
+            <li>Authored internal whitepaper benchmarking DETR vs EfficientNet on wideband signal (TorchSig) — used in internal literature reviews to guide DSP arch choices</li>
+            <li>Built the IQ Classifier — Big-Iron Docker app with plug-and-play ONNX model; PyTorch classifier on 5–6 UAV signal types · <b>95% accuracy · still actively used</b></li>
+            <li>Established the Spectrum Systems Lab's central repository for <b>RF multipath identification</b> — became the go-to resource across multiple programs, cut onboarding time</li>
+            <li>Built the Track Manager — a Big-Iron Dockerized app that ingests PDW data and publishes emitter on/off timing over ActiveMQ; integrated into a full multi-app EW suite</li>
+          </ul>
+        </div>
+
+        <!-- ROLE 4 — SW Eng Researcher (5G) -->
+        <div class="box" style="margin-right:22%; padding:22px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+            <div class="h-hand" style="font-size:22px;">Software Engineering Researcher</div>
+            <div class="label">Lockheed Martin · 5G + SDR · Cherry Hill, NJ · Mar '22 — Nov '22</div>
+          </div>
+          <ul class="tl-bullets" style="margin-top:10px;">
+            <li>Built a GitLab CI/CD pipeline from scratch (vendor Docker · Valgrind · HW-emulated test stage) — <b>compile + test 1 hour → 8 minutes</b></li>
+            <li>Wrote the C++ SDR front-end on custom 5G nodes — programmable transmission of proprietary research signals</li>
+            <li>Optimized antenna + frequency parameters for customer-demo environment — <b>+400% transmission range</b></li>
+            <li>Contributed to a Python traffic-monitoring tool surfacing real-time Docker container network behavior</li>
+          </ul>
+        </div>
+
+        <!-- ROLE 5 — Software Engineer (Radar, absorbs earlier test-eng automation work) -->
+        <div class="box" style="margin-left:8%; margin-right:14%; padding:22px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+            <div class="h-hand" style="font-size:22px;">Software Engineer</div>
+            <div class="label">Lockheed Martin · Radar · Moorestown, NJ · Jul '19 — Mar '22</div>
+          </div>
+          <ul class="tl-bullets" style="margin-top:10px;">
+            <li>Refactored a legacy radar error model solo as an associate (Tech Fellow unavailable) — 2-week turnaround, modernized arch, verified against requirements · <b>$70K+ saved</b></li>
+            <li>Switch-matrix + spectrogram automation for panel S-param testing — <b>1 day → ~10 minutes per panel</b>, surfaced bad connections before customer delivery</li>
+            <li>Built a VB web app generating Tableau .twb workbooks by writing the XML directly (Python API was deprecated) — adopted by the Data Viz team as the corp-wide license-free path</li>
+            <li>Automated MATLAB-driven Noise Power Density tests against spec — permanently kept on the test chamber</li>
+            <li>Calibration data analysis driving radar pass/fail decisions for customer delivery</li>
+            <li>Python GUI exposing probe coords at the workstation — eliminated safety-door verification trips during active testing</li>
+            <li>Scrum Master for the radar team — sprint facilitation, blocker tracking, eng↔test↔PM bridge</li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="callout" style="left:24px;bottom:24px;color:var(--accent);"><span class="arr">↙</span><span>stacked &amp; offset · four roles, one company — hover constellation stars for the same bullets ↑</span></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="sec" id="v2-projects">
+      <div class="sec-tag" style="color:rgba(246,243,236,0.5);">04 · projects</div>
+      <div class="sec-h"><span style="color:var(--paper);">side experiments.</span></div>
+      <div class="grid" style="grid-template-columns: 2fr 1fr; gap:18px;">
+        <div class="col" style="gap:18px;" data-comment-anchor="0466c2ab:319">
+          <div class="box" style="padding:0;">
+            <image-slot id="v2-proj-paper" style="width:100%; height:200px; display:block;" shape="rect" placeholder="Drop paper hero · wideband spectrogram"></image-slot>
+            <div style="padding:20px;">
+              <div style="display:flex;align-items:center;gap:10px; flex-wrap:wrap;">
+                <div class="h-hand" style="font-size:24px;">Keyboard Keystroke Predictions on Various Switches</div>
+                <span class="pill">paper · 2024</span>
+              </div>
+              <div class="body-lo" style="color:rgba(246,243,236,0.7); margin-top:6px;">Extended an acoustic side-channel attack paper to mechanical keyboards. Built a custom data-collection rig + multi-switch dataset; modified CoAtNet into a fusion architecture ingesting both Mel-spectrogram audio and tabular keyboard metadata. 96%+ accuracy on single-key binary classification across three switch types.</div>
+              <div style="display:flex; gap:8px; margin-top:10px;"><span class="pill">read PDF</span><span class="pill">arXiv · soon</span><span class="pill">github</span></div>
+            </div>
+          </div>
+          <div class="box" style="padding:0;">
+            <image-slot id="v2-proj-galaxy" style="width:100%; height:200px; display:block;" shape="rect" placeholder="Drop a still · Youtube Galaxy"></image-slot>
+            <div style="padding:20px;">
+              <div style="display:flex;align-items:center;gap:10px; flex-wrap:wrap;">
+                <div class="h-hand" style="font-size:24px;">Youtube Galaxy</div>
+                <span class="pill">live demo</span>
+              </div>
+              <div class="body-lo" style="color:rgba(246,243,236,0.7); margin-top:6px;">End-to-end NLP pipeline that scrapes YouTube creator data, embeds with all-MiniLM-L6-v2, clusters ~120 creator communities via t-SNE + K-means, names clusters with Gemini Pro, and serves it all as a live 3D Plotly viz on Streamlit Cloud.</div>
+              <div style="display:flex; gap:8px; margin-top:10px;"><span class="pill">youtube-galaxy.streamlit.app</span><span class="pill">github</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col" style="gap:18px;" data-comment-anchor="5d68a9a1:339">
+          <div class="box" style="padding:0;">
+            <image-slot id="v2-proj-gameagent" style="width:100%; height:100px; display:block;" shape="rect" placeholder="Drop gameplay clip · CV overlay"></image-slot>
+            <div style="padding:14px 16px;">
+              <div style="display:flex;align-items:center;gap:8px; flex-wrap:wrap;">
+                <div class="h-hand" style="font-size:19px;">AI Game Agent — Dead by Daylight</div>
+                <span class="pill accent">WIP</span>
+              </div>
+              <div class="body-lo" style="color:rgba(246,243,236,0.7); margin-top:6px;">CV + DEEPSort controls the "Killer". Commands → external radio → Bluetooth keyboard controller.</div>
+              <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;"><span class="pill">github</span><span class="pill">roboflow demo</span></div>
+            </div>
+          </div>
+          <div class="box" style="padding:0;">
+            <image-slot id="v2-proj-chaos" style="width:100%; height:100px; display:block;" shape="rect" placeholder="Drop terminal capture · agent swarm"></image-slot>
+            <div style="padding:14px 16px;">
+              <div style="display:flex;align-items:center;gap:8px; flex-wrap:wrap;">
+                <div class="h-hand" style="font-size:19px;">Chaos Coding Agents</div>
+              </div>
+              <div class="body-lo" style="color:rgba(246,243,236,0.7); margin-top:6px;">Multiple coding agents in parallel on the same repo — chaos-engineering ideas for agent swarms.</div>
+              <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;"><span class="pill">github</span><span class="pill">writeup</span></div>
+            </div>
+          </div>
+          <div class="box" style="padding:0;">
+            <image-slot id="v2-proj-ytmusic" style="width:100%; height:100px; display:block;" shape="rect" placeholder="Drop a screen capture · waveform UI"></image-slot>
+            <div style="padding:14px 16px;">
+              <div style="display:flex;align-items:center;gap:8px; flex-wrap:wrap;">
+                <div class="h-hand" style="font-size:19px;">YT Music Rec Engine</div>
+                <span class="pill accent">planned</span>
+              </div>
+              <div class="body-lo" style="color:rgba(246,243,236,0.7); margin-top:6px;">YouTube's creator audio library is royalty-free but only filterable by genre / mood. Drop in a Spotify or YouTube Music link → recommend the closest copyright-safe match.</div>
+              <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;"><span class="pill">github · soon</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDU + CONTACT row -->
+    <section class="sec">
+      <div class="row" style="gap:24px; align-items:stretch;">
+        <div style="flex:1.2;">
+          <div class="sec-tag" style="color:rgba(246,243,236,0.5);">05 · education</div>
+          <div class="h-hand" style="font-size:24px; margin-top:8px;">MS Artificial Intelligence</div>
+          <div class="label">Johns Hopkins University</div>
+          <div class="h-hand" style="font-size:22px; margin-top:14px;">BS Electrical Engineering</div>
+          <div class="label">Drexel University</div>
+        </div>
+        <div style="flex:1; padding:22px; background: var(--accent); border-color: var(--accent); color: var(--ink);" class="box" data-comment-anchor="c70cac95:351">
+          <div class="label up" style="color:var(--ink); opacity:0.7;">06 · contact</div>
+          <div class="h-hand" style="font-size:26px; color:var(--ink); margin-top:6px;">Open to full-time roles.</div>
+          <div style="margin-top:14px; font-family:var(--mono); font-size:13px; color:var(--ink);">
+            bsaleh524@gmail.com<br/>
+            github.com/bsaleh524<br/>
+            linkedin.com/in/basem-saleh
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- V3 — Editorial Mark (magazine spread · scarab)                      -->
+  <!-- =================================================================== -->
+  <section class="wf v3" data-i="2" hidden>
+    <div class="wf-pin">03 · Editorial Mark</div>
+    <div class="wf-stamp">magazine grid · geometric scarab · margin notes</div>
+
+    <!-- HERO -->
+    <div class="v3-hero">
+      <div class="v3-hero-l">
+        <div>
+          <div class="v3-kicker">Vol · 01 — Portfolio — MMXXVI</div>
+          <h1 class="v3-name"><span class="underline">Basem</span><br/>Saleh.</h1>
+          <div class="label" style="font-size:18px;">— Machine Learning Engineer · Signal · Vision · Agents</div>
+        </div>
+        <div>
+          <div style="font-family:var(--hand); font-weight:300; font-size:20px; line-height:1.45; color:var(--ink); max-width:460px;">
+            "Models for hard problems. <span style="color:var(--accent);">Sometimes they play video games.</span>"
+          </div>
+          <div class="v3-meta-row">
+            <div class="v3-meta-cell">
+              <div class="v3-num">6+</div>
+              <div class="label">years · Lockheed Martin</div>
+            </div>
+            <div class="v3-meta-cell">
+              <div class="v3-num">$1M+</div>
+              <div class="label">funding · DSP ML</div>
+            </div>
+            <div class="v3-meta-cell">
+              <div class="v3-num">MS AI</div>
+              <div class="label">JHU · in progress</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:18px;">
+            <span class="pill accent">↓ read on</span>
+            <span class="pill">resume.pdf</span>
+          </div>
+        </div>
+      </div>
+      <div class="v3-hero-r">
+        <!-- Geometric scarab — assembled from primitives only -->
+        <svg class="scarab" viewBox="0 0 320 380" aria-label="scarab mark · geometric">
+          <defs>
+            <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse">
+              <path d="M 0 6 L 6 0" stroke="rgba(26,26,26,0.4)" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <g fill="none" stroke="var(--ink)" stroke-width="1.5">
+            <!-- head -->
+            <ellipse cx="160" cy="60" rx="34" ry="22"/>
+            <!-- pronotum (body upper) -->
+            <path d="M 100 110 Q 160 80 220 110 L 220 170 Q 160 150 100 170 Z" fill="url(#hatch)"/>
+            <!-- elytra (body lower – two halves) -->
+            <path d="M 100 170 Q 160 200 220 170 L 220 320 Q 200 340 160 340 Q 120 340 100 320 Z"/>
+            <line x1="160" y1="170" x2="160" y2="335" stroke-dasharray="3 3"/>
+            <!-- wings (open) -->
+            <path d="M 90 120 Q 30 140 20 220 Q 30 280 80 250 Q 110 220 100 170" stroke-linejoin="round"/>
+            <path d="M 230 120 Q 290 140 300 220 Q 290 280 240 250 Q 210 220 220 170" stroke-linejoin="round"/>
+            <!-- legs -->
+            <path d="M 100 200 L 60 230"/><path d="M 100 240 L 50 270"/><path d="M 100 290 L 70 320"/>
+            <path d="M 220 200 L 260 230"/><path d="M 220 240 L 270 270"/><path d="M 220 290 L 250 320"/>
+            <!-- antennae -->
+            <path d="M 145 42 Q 130 20 110 18"/><path d="M 175 42 Q 190 20 210 18"/>
+            <!-- sun above (subtle ref) -->
+            <circle cx="160" cy="14" r="6" fill="var(--accent)" stroke="none"/>
+          </g>
+        </svg>
+        <div class="callout" style="top:18px;left:18px;"><span>geometric scarab · personal · not costume-y · CSS or SVG animation</span><span class="arr">↘</span></div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="v3-sec">
+      <div class="v3-marg">
+        <div class="sec-tag">§ 02</div>
+        <div class="sec-h"><span class="ink">About.</span></div>
+        <div class="body-lo">Three short paragraphs. Margin keeps the eye anchored as the right column scrolls.</div>
+        <div class="note" style="margin-top:14px;">margin-set heading</div>
+      </div>
+      <div class="v3-content">
+        <p style="font-family:var(--hand); font-weight:300; font-size:22px; line-height:1.5; max-width:640px; margin:0;">
+          First-generation Egyptian-American, youngest of three siblings. Currently a part-time <span style="border-bottom:1.5px dashed var(--ink);">MS in Artificial Intelligence at Johns Hopkins</span>; BS in Electrical Engineering from Drexel.
+        </p>
+        <p style="font-family:var(--hand); font-weight:300; font-size:20px; line-height:1.55; max-width:640px; margin-top:16px; color:var(--muted);">
+          Defense-industry ML — applying signal processing and computer vision to hard, real-world problems.
+        </p>
+        <p style="font-family:var(--hand); font-weight:300; font-size:20px; line-height:1.55; max-width:640px; margin-top:16px;">
+          Outside of work: <span style="color:var(--accent);">part mountain, part indoor hobbyist</span> — hiker, snowboarder, photographer, gamer.
+        </p>
+
+        <div style="margin-top:28px; border-top: 1.5px solid var(--ink); padding-top:18px;">
+          <div class="label up">— stack</div>
+          <div class="skill-cloud" style="margin-top:10px; gap:6px;">
+            <span class="pill">Python</span><span class="pill">PyTorch</span><span class="pill">ML</span>
+            <span class="pill">Computer Vision</span><span class="pill">Signal Processing</span>
+            <span class="pill dashed">C++</span><span class="pill dashed">C#</span><span class="pill dashed">MATLAB</span>
+            <span class="pill">AWS</span><span class="pill">Docker</span><span class="pill">CI/CD</span>
+            <span class="pill">Object Detection</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE — single timeline, year column -->
+    <section class="v3-sec">
+      <div class="v3-marg">
+        <div class="sec-tag">§ 03</div>
+        <div class="sec-h"><span class="ink">Experience.</span></div>
+        <div class="body-lo">One employer · three roles. Years live in the margin, achievements in the body.</div>
+        <div class="note" style="margin-top:14px;">margin year markers</div>
+      </div>
+      <div class="v3-content">
+        <div style="display:grid; grid-template-columns: 80px 1fr; gap: 18px 28px;">
+          <!-- Role 1 -->
+          <div class="h-hand" style="font-size:28px; color:var(--accent); line-height:1;">'24<br/><span style="font-size:14px; color:var(--muted); font-family:var(--label);">— now</span></div>
+          <div>
+            <div class="h-hand" style="font-size:24px;">Machine Learning Engineer <span class="proj-status" style="margin-left:6px;">current</span></div>
+            <div class="label" style="margin-bottom:6px;">Lockheed Martin · DSP + Vision · PyTorch</div>
+            <ul class="tl-bullets">
+              <li>$1M+ funding · real-time DSP ML for frequency classification</li>
+              <li>Scheduling estimation model adopted as internal product</li>
+              <li>Whitepaper · detectors vs. classifiers in wideband signal</li>
+              <li>UAV signal-type ID classifier (supervised, real-time)</li>
+              <li>+37% pneumonia classifier accuracy via custom pipeline</li>
+              <li>Documented S3 patterns for ML pipelines</li>
+            </ul>
+          </div>
+
+          <div style="border-top:1.5px dashed var(--rule); grid-column: span 2;"></div>
+
+          <div class="h-hand" style="font-size:28px; color:var(--ink); line-height:1;">'22<br/><span style="font-size:14px; color:var(--muted); font-family:var(--label);">— '24</span></div>
+          <div>
+            <div class="h-hand" style="font-size:22px;">Software Engineering Researcher</div>
+            <div class="label" style="margin-bottom:6px;">Lockheed Martin · 5G + SDR</div>
+            <ul class="tl-bullets">
+              <li>Compile time 1h → 8min via GitLab CI/CD</li>
+              <li>C++ to control SDRs on custom 5G nodes</li>
+              <li>+400% transmission range · antenna freq. optimization</li>
+              <li>Docker traffic-monitoring tool</li>
+            </ul>
+          </div>
+
+          <div style="border-top:1.5px dashed var(--rule); grid-column: span 2;"></div>
+
+          <div class="h-hand" style="font-size:28px; color:var(--ink); line-height:1;">'20<br/><span style="font-size:14px; color:var(--muted); font-family:var(--label);">— '22</span></div>
+          <div>
+            <div class="h-hand" style="font-size:22px;">Software Engineer</div>
+            <div class="label" style="margin-bottom:6px;">Lockheed Martin · Radar</div>
+            <ul class="tl-bullets">
+              <li>Radar calibration → customer readiness (MATLAB)</li>
+              <li>$70K+ saved · refactored legacy radar error model</li>
+              <li>Panel calibration 1d → 10min · C# automation</li>
+              <li>S-parameter validation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="v3-sec">
+      <div class="v3-marg">
+        <div class="sec-tag">§ 04</div>
+        <div class="sec-h"><span class="ink">Projects.</span></div>
+        <div class="body-lo">One feature project (large), satellites underneath.</div>
+        <div class="note" style="margin-top:14px;">hero + satellites</div>
+      </div>
+      <div class="v3-content">
+        <!-- hero project -->
+        <div class="proj-card" style="padding:0;">
+          <div class="proj-art" style="height:240px;">[ feature still · gameplay capture + tracked bounding boxes ]</div>
+          <div style="padding:18px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="h-hand" style="font-size:28px;">AI Game Agent — Dead by Daylight</div>
+              <span class="proj-status">WIP</span>
+            </div>
+            <div class="body-lo" style="margin-top:6px;">Computer vision + DEEPSort tracking controls the "Killer". Commands sent via external radio interface → Bluetooth keyboard controller.</div>
+            <div class="proj-links"><a>github →</a><a>roboflow demo →</a><a>youtube · TBD</a></div>
+          </div>
+        </div>
+        <div class="grid" style="grid-template-columns: 1fr 1fr; margin-top:18px;">
+          <div class="proj-card">
+            <div class="proj-art" style="height:120px;">[ deadlift · side view ]</div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div class="proj-title">Deadlift Form Checker</div>
+              <span class="proj-status">WIP</span>
+            </div>
+            <div class="body-lo">Side-view real-time form prediction. Streaming inference.</div>
+            <div class="proj-links"><a>github · soon</a></div>
+          </div>
+          <div class="proj-card soft" style="border-style:dashed; opacity:0.7;">
+            <div class="proj-art" style="height:120px;">[ reserved · next project ]</div>
+            <div class="proj-title" style="color:var(--muted);">— next —</div>
+            <div class="body-lo">Slot for upcoming work.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDU + CONTACT -->
+    <section class="v3-sec">
+      <div class="v3-marg">
+        <div class="sec-tag">§ 05</div>
+        <div class="sec-h"><span class="ink">Coda.</span></div>
+        <div class="body-lo">Education &amp; contact in a tight closer block.</div>
+      </div>
+      <div class="v3-content">
+        <div class="row" style="gap:24px;">
+          <div class="box" style="flex:1;">
+            <div class="label up">In progress</div>
+            <div class="h-hand" style="font-size:22px;">MS · Artificial Intelligence</div>
+            <div class="body-lo">Johns Hopkins · part-time</div>
+          </div>
+          <div class="box dashed" style="flex:1;">
+            <div class="label up">Completed</div>
+            <div class="h-hand" style="font-size:22px;">BS · Electrical Engineering</div>
+            <div class="body-lo">Drexel</div>
+          </div>
+        </div>
+        <div class="box accent" style="margin-top:20px; padding:22px;">
+          <div class="h-hand" style="font-size:26px;">Open to full-time opportunities. <span style="color:var(--accent);">Say hello.</span></div>
+          <div style="margin-top:10px; font-family:var(--mono); font-size:13px;">
+            bsaleh524@gmail.com &nbsp;·&nbsp; github.com/bsaleh524 &nbsp;·&nbsp; linkedin.com/in/basem-saleh
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- V4 — Cluster · Bento                                                -->
+  <!-- =================================================================== -->
+  <section class="wf" data-i="3" hidden>
+    <div class="wf-pin">04 · Cluster · Bento</div>
+    <div class="wf-stamp">dense bento · scatter-plot mark · above-the-fold density</div>
+
+    <div class="v4-hero">
+      <div class="v4-hero-l">
+        <div class="label up">portfolio · 2026</div>
+        <h1 class="v4-name">Basem Saleh.</h1>
+        <div class="label" style="font-size:18px;">— Machine Learning Engineer</div>
+        <div style="font-family:var(--hand); font-weight:300; font-size:20px; line-height:1.45; color:var(--ink); max-width:480px; margin-top:8px;">
+          Models for signal &amp; vision in the defense industry. <span style="color:var(--accent);">Side experiments in agents and games.</span>
+        </div>
+        <div style="display:flex; gap:10px; margin-top:14px;">
+          <span class="pill accent">view work ↓</span>
+          <span class="pill">resume.pdf</span>
+        </div>
+      </div>
+      <div class="v4-hero-r">
+        <!-- scatter-plot resolving to BS -->
+        <svg viewBox="0 0 320 320" width="320" height="320" aria-label="cluster mark">
+          <g fill="var(--ink)">
+            <!-- B shape -->
+            <g>
+              <circle cx="70" cy="60" r="3"/><circle cx="86" cy="60" r="3"/><circle cx="102" cy="62" r="3"/>
+              <circle cx="118" cy="68" r="3"/><circle cx="128" cy="80" r="3"/><circle cx="128" cy="100" r="3"/>
+              <circle cx="118" cy="116" r="3"/><circle cx="100" cy="124" r="3"/>
+              <circle cx="80" cy="124" r="3"/><circle cx="70" cy="124" r="3"/>
+              <circle cx="70" cy="140" r="3"/><circle cx="70" cy="160" r="3"/>
+              <circle cx="70" cy="60" r="3"/>
+              <circle cx="60" cy="80" r="3"/><circle cx="60" cy="100" r="3"/>
+              <circle cx="60" cy="120" r="3"/><circle cx="60" cy="140" r="3"/>
+              <circle cx="60" cy="160" r="3"/>
+              <circle cx="80" cy="180" r="3"/><circle cx="100" cy="180" r="3"/>
+              <circle cx="118" cy="174" r="3"/><circle cx="128" cy="158" r="3"/>
+              <circle cx="128" cy="140" r="3"/><circle cx="116" cy="126" r="3"/>
+            </g>
+            <!-- S shape -->
+            <g>
+              <circle cx="240" cy="62" r="3"/><circle cx="220" cy="60" r="3"/>
+              <circle cx="200" cy="62" r="3"/><circle cx="184" cy="74" r="3"/>
+              <circle cx="184" cy="92" r="3"/><circle cx="198" cy="104" r="3"/>
+              <circle cx="218" cy="110" r="3"/><circle cx="238" cy="118" r="3"/>
+              <circle cx="252" cy="132" r="3"/><circle cx="252" cy="150" r="3"/>
+              <circle cx="240" cy="166" r="3"/><circle cx="220" cy="172" r="3"/>
+              <circle cx="200" cy="172" r="3"/><circle cx="184" cy="168" r="3"/>
+            </g>
+            <!-- ambient noise dots -->
+          </g>
+          <g fill="var(--accent)" opacity="0.8">
+            <circle cx="50" cy="220" r="2"/><circle cx="80" cy="240" r="2"/>
+            <circle cx="120" cy="250" r="2"/><circle cx="170" cy="246" r="2"/>
+            <circle cx="210" cy="252" r="2"/><circle cx="250" cy="238" r="2"/>
+            <circle cx="280" cy="220" r="2"/>
+            <circle cx="40" cy="260" r="2"/><circle cx="90" cy="270" r="2"/>
+            <circle cx="140" cy="278" r="2"/><circle cx="200" cy="276" r="2"/>
+            <circle cx="260" cy="270" r="2"/>
+          </g>
+          <g stroke="var(--rule)" stroke-width="0.5" stroke-dasharray="2 3" fill="none">
+            <line x1="20" y1="200" x2="300" y2="200"/>
+            <line x1="20" y1="200" x2="20" y2="20"/>
+          </g>
+          <text x="20" y="306" font-family="ui-monospace, monospace" font-size="9" fill="var(--muted)">cluster.fit_predict() → "BS"</text>
+        </svg>
+        <div class="callout" style="top:18px;right:18px;text-align:right;"><span>scatter dots animate from random → resolve to monogram "BS"</span><span class="arr">↘</span></div>
+      </div>
+    </div>
+
+    <!-- BENTO ABOUT/SKILLS/EXPERIENCE summary -->
+    <div class="v4-bento">
+      <div class="box b-1">
+        <div class="label up">02 · about</div>
+        <div style="font-family:var(--hand); font-weight:300; font-size:20px; line-height:1.45; margin-top:6px;">
+          First-gen Egyptian-American, youngest of three. <span style="color:var(--muted);">Part-time MS in AI @ Johns Hopkins · BS EE @ Drexel.</span>
+          <span style="color:var(--accent);">Part mountain · part indoor hobbyist.</span>
+        </div>
+        <div style="margin-top:auto;" class="label">hiker · snowboarder · photographer · gamer</div>
+      </div>
+      <div class="box b-2 accent">
+        <div class="label up">$1M+ in funding</div>
+        <div class="h-hand" style="font-size:24px;">DSP ML for freq. classification</div>
+      </div>
+      <div class="box b-3">
+        <div class="label up">+37% accuracy</div>
+        <div class="h-hand" style="font-size:24px;">pneumonia classifier · custom pipeline</div>
+      </div>
+      <div class="box b-4">
+        <div class="label up">03 · stack</div>
+        <div class="skill-cloud" style="margin-top:6px;">
+          <span class="pill">Python</span><span class="pill">PyTorch</span><span class="pill">CV</span>
+          <span class="pill">DSP</span><span class="pill dashed">C++</span><span class="pill dashed">C#</span>
+          <span class="pill dashed">MATLAB</span><span class="pill">AWS</span><span class="pill">Docker</span><span class="pill">CI/CD</span>
+        </div>
+      </div>
+      <div class="box b-5">
+        <div class="label up">+400% range</div>
+        <div class="h-hand" style="font-size:20px;">5G antenna freq. opt.</div>
+      </div>
+      <div class="box b-6">
+        <div class="label up">$70K saved</div>
+        <div class="h-hand" style="font-size:20px;">radar error model refactor</div>
+      </div>
+      <div class="box b-7 dashed" style="border-color:var(--ink);">
+        <div class="label up">04 · pipeline</div>
+        <div class="h-hand" style="font-size:18px; margin-top:4px;">1h → 8min &nbsp; ·&nbsp; 1d → 10min</div>
+        <div class="body-lo">CI/CD compile time · radar panel calibration · automation wins on the floor.</div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE — full -->
+    <section class="sec" style="padding:48px 40px;">
+      <div class="sec-tag">05 · experience</div>
+      <div class="sec-h"><span class="ink">Roles at Lockheed Martin.</span></div>
+      <div class="grid" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="box" style="padding:18px;">
+          <div class="label up" style="color:var(--accent);">2024 — now</div>
+          <div class="h-hand" style="font-size:22px;">ML Engineer</div>
+          <ul class="tl-bullets" style="margin-top:8px;">
+            <li>real-time DSP ML · PyTorch</li>
+            <li>scheduling-est. → internal product</li>
+            <li>wideband signal whitepaper</li>
+            <li>UAV signal-type ID</li>
+            <li>S3 docs for ML pipelines</li>
+          </ul>
+        </div>
+        <div class="box" style="padding:18px;">
+          <div class="label up">2022 — 2024</div>
+          <div class="h-hand" style="font-size:22px;">SW Eng Researcher</div>
+          <ul class="tl-bullets" style="margin-top:8px;">
+            <li>SDRs on 5G nodes · C++</li>
+            <li>GitLab CI/CD</li>
+            <li>+400% radio range</li>
+            <li>Docker traffic tool</li>
+          </ul>
+        </div>
+        <div class="box" style="padding:18px;">
+          <div class="label up">2020 — 2022</div>
+          <div class="h-hand" style="font-size:22px;">SW Engineer</div>
+          <ul class="tl-bullets" style="margin-top:8px;">
+            <li>radar calibration · MATLAB</li>
+            <li>$70K legacy refactor</li>
+            <li>1d → 10min via C# auto.</li>
+            <li>S-param validation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS as bento-ish -->
+    <section class="sec" style="padding:48px 40px;">
+      <div class="sec-tag">06 · projects</div>
+      <div class="sec-h"><span class="ink">Side experiments.</span></div>
+      <div class="grid" style="grid-template-columns: 2fr 1fr 1fr;">
+        <div class="proj-card">
+          <div class="proj-art" style="height:200px;">[ gameplay + DEEPSort overlay ]</div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div class="proj-title">AI Game Agent — Dead by Daylight</div>
+            <span class="proj-status">WIP</span>
+          </div>
+          <div class="body-lo">CV + DEEPSort controls the "Killer". Commands → radio → BT keyboard.</div>
+          <div class="proj-links"><a>github →</a><a>roboflow demo →</a><a>youtube · TBD</a></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-art" style="height:120px;">[ deadlift keypoints ]</div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="proj-title">Deadlift Form Checker</div>
+            <span class="proj-status">WIP</span>
+          </div>
+          <div class="body-lo">Side-view real-time form prediction.</div>
+          <div class="proj-links"><a>github · soon</a></div>
+        </div>
+        <div class="proj-card soft" style="border-style:dashed; opacity:0.7;">
+          <div class="proj-art" style="height:120px;">[ reserved ]</div>
+          <div class="proj-title" style="color:var(--muted);">— next —</div>
+          <div class="body-lo">Slot for upcoming work.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDU + CONTACT -->
+    <section class="sec" style="padding:48px 40px;">
+      <div class="grid" style="grid-template-columns: 1fr 1fr 1.4fr;">
+        <div class="box" style="padding:18px;">
+          <div class="label up">07 · education</div>
+          <div class="h-hand" style="font-size:22px; margin-top:4px;">MS · AI</div>
+          <div class="body-lo">Johns Hopkins · in progress</div>
+        </div>
+        <div class="box dashed" style="padding:18px;">
+          <div class="label up">&nbsp;</div>
+          <div class="h-hand" style="font-size:22px; margin-top:4px;">BS · Electrical Eng.</div>
+          <div class="body-lo">Drexel University</div>
+        </div>
+        <div class="box accent" style="padding:18px;">
+          <div class="label up">08 · contact</div>
+          <div class="h-hand" style="font-size:22px; margin-top:4px;">Open to full-time. Say hello.</div>
+          <div class="body-lo" style="color:var(--ink); margin-top:6px;">bsaleh524@gmail.com · github · linkedin</div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- V5 — Split Frame                                                    -->
+  <!-- =================================================================== -->
+  <section class="wf" data-i="4" hidden>
+    <div class="wf-pin">05 · Split Frame</div>
+    <div class="wf-stamp">sticky rail · signature parked left · long-form right</div>
+
+    <div class="v5">
+      <!-- LEFT RAIL -->
+      <aside class="v5-rail">
+        <div class="label up">portfolio · 2026</div>
+        <div class="v5-name">Basem<br/>Saleh.</div>
+        <div class="v5-title">Machine Learning Engineer</div>
+
+        <div class="v5-sig" aria-label="signature element · always visible">
+          <!-- compact signal sweep version -->
+          <svg viewBox="0 0 240 240" width="100%" height="100%">
+            <g fill="none" stroke="var(--rule)" stroke-width="0.8" stroke-dasharray="2 3">
+              <circle cx="120" cy="120" r="100"/>
+              <circle cx="120" cy="120" r="74"/>
+              <circle cx="120" cy="120" r="48"/>
+              <circle cx="120" cy="120" r="22"/>
+              <line x1="20" y1="120" x2="220" y2="120"/>
+              <line x1="120" y1="20" x2="120" y2="220"/>
+            </g>
+            <g stroke="var(--ink)" stroke-width="1.2" fill="none">
+              <circle cx="120" cy="120" r="100"/>
+            </g>
+            <defs>
+              <linearGradient id="sweep5" x1="0" x2="1">
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <line x1="120" y1="120" x2="220" y2="120" stroke="url(#sweep5)" stroke-width="2" transform="rotate(-44 120 120)"/>
+            <g fill="var(--accent)">
+              <circle cx="166" cy="74" r="3.5"/>
+              <circle cx="92" cy="156" r="2.5"/>
+              <circle cx="180" cy="148" r="2.5"/>
+            </g>
+            <text x="12" y="232" font-family="ui-monospace, monospace" font-size="8" fill="var(--muted)">scan · 32 hz · live</text>
+          </svg>
+        </div>
+
+        <div class="label up">— Sections</div>
+        <nav class="v5-nav">
+          <a class="curr">01 · Intro</a>
+          <a>02 · About</a>
+          <a>03 · Experience</a>
+          <a>04 · Projects</a>
+          <a>05 · Education</a>
+          <a>06 · Contact</a>
+        </nav>
+
+        <div class="v5-contact">
+          <a>↳ resume.pdf</a>
+          <a>↳ github.com/bsaleh524</a>
+          <a>↳ linkedin · basem-saleh</a>
+          <a>↳ bsaleh524@gmail.com</a>
+        </div>
+
+        <div class="callout" style="bottom:12px; left:12px; right:12px; position:static; margin-top:18px; transform:rotate(-1deg);">
+          <span class="arr">↖</span><span>sticky rail · signature always visible · nav highlights current section as you scroll</span>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="v5-main">
+        <!-- intro / hero on right -->
+        <section class="sec">
+          <div class="sec-tag">01 · Intro</div>
+          <div class="sec-h"><span class="ink">Models for hard problems.</span><br/><span class="acc">Sometimes they play video games.</span></div>
+          <div style="font-family:var(--hand); font-weight:300; font-size:20px; line-height:1.55; color:var(--muted); max-width:640px;">
+            ML engineer in the defense industry — DSP, computer vision, agents. Six years into one company, three roles deep. Currently moonlighting on an MS in AI at Johns Hopkins.
+          </div>
+          <div style="display:flex; gap:10px; margin-top:18px;">
+            <span class="pill accent">↓ view experience</span>
+            <span class="pill">resume.pdf</span>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-tag">02 · About</div>
+          <div class="sec-h"><span class="ink">In three breaths.</span></div>
+          <div class="row" style="gap:24px; align-items:flex-start;">
+            <div style="flex:1.4;">
+              <p style="font-family:var(--hand); font-weight:300; font-size:20px; line-height:1.55;">
+                First-gen Egyptian-American, youngest of three siblings.
+              </p>
+              <p style="font-family:var(--hand); font-weight:300; font-size:20px; line-height:1.55;">
+                MS in AI at Johns Hopkins (part-time); BS Electrical Engineering at Drexel.
+              </p>
+              <p style="font-family:var(--hand); font-weight:300; font-size:20px; line-height:1.55;">
+                Outside of work: <span style="color:var(--accent);">part mountain — part indoor hobbyist.</span> Hiker, snowboarder, photographer, gamer.
+              </p>
+            </div>
+            <div style="flex:1; min-width:200px;">
+              <div class="placeholder" style="height:200px;">[ candid portrait ]</div>
+            </div>
+          </div>
+          <div style="margin-top:22px;">
+            <div class="label up">— stack</div>
+            <div class="skill-cloud" style="margin-top:8px;">
+              <span class="pill">Python</span><span class="pill">PyTorch</span><span class="pill">Machine Learning</span>
+              <span class="pill">Computer Vision</span><span class="pill">Signal Processing</span>
+              <span class="pill dashed">C++</span><span class="pill dashed">C#</span><span class="pill dashed">MATLAB</span>
+              <span class="pill">AWS</span><span class="pill">Docker</span><span class="pill">CI/CD</span><span class="pill">Object Detection</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-tag">03 · Experience</div>
+          <div class="sec-h"><span class="ink">Lockheed Martin, three chapters.</span></div>
+          <div class="tl">
+            <div class="tl-node acc">
+              <div class="tl-role">Machine Learning Engineer <span class="proj-status" style="margin-left:6px;">current</span></div>
+              <div class="tl-meta">2024 — present · DSP, vision, PyTorch</div>
+              <ul class="tl-bullets">
+                <li>$1M+ funding · real-time DSP ML for frequency classification</li>
+                <li>Scheduling-estimation model adopted as internal product</li>
+                <li>Whitepaper · detectors vs. classifiers in wideband signal</li>
+                <li>UAV signal-type ID classifier (supervised, real-time)</li>
+                <li>+37% pneumonia classifier accuracy · custom pipeline</li>
+                <li>S3 usage documentation for ML pipelines</li>
+              </ul>
+            </div>
+            <div class="tl-node">
+              <div class="tl-role">Software Engineering Researcher</div>
+              <div class="tl-meta">2022 — 2024 · 5G + SDR</div>
+              <ul class="tl-bullets">
+                <li>Compile time 1h → 8min via GitLab CI/CD</li>
+                <li>C++ control of SDRs on custom 5G nodes</li>
+                <li>+400% transmission range · antenna freq. optimization</li>
+                <li>Python+Bash unit tests in pipeline</li>
+                <li>Docker traffic-monitoring tool</li>
+              </ul>
+            </div>
+            <div class="tl-node">
+              <div class="tl-role">Software Engineer</div>
+              <div class="tl-meta">2020 — 2022 · radar</div>
+              <ul class="tl-bullets">
+                <li>Calibration data analysis (MATLAB)</li>
+                <li>$70K+ legacy error-model refactor</li>
+                <li>Panel calibration 1d → 10min · C# automation</li>
+                <li>S-parameter analysis for validation</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-tag">04 · Projects</div>
+          <div class="sec-h"><span class="ink">Side experiments.</span></div>
+          <div class="grid" style="grid-template-columns: 1fr;">
+            <div class="proj-card" style="display:grid; grid-template-columns: 280px 1fr; gap:18px; padding:18px;">
+              <div class="proj-art" style="height:160px; margin:0;">[ gameplay still · DEEPSort overlay ]</div>
+              <div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div class="proj-title">AI Game Agent — Dead by Daylight</div>
+                  <span class="proj-status">WIP</span>
+                </div>
+                <div class="body-lo" style="margin-top:6px;">Computer vision + DEEPSort tracking controls the "Killer". Commands sent via external radio interface → Bluetooth keyboard controller.</div>
+                <div class="proj-links" style="margin-top:10px;"><a>github →</a><a>roboflow demo →</a><a>youtube · TBD</a></div>
+              </div>
+            </div>
+            <div class="proj-card" style="display:grid; grid-template-columns: 280px 1fr; gap:18px; padding:18px;">
+              <div class="proj-art" style="height:140px; margin:0;">[ deadlift · keypoints ]</div>
+              <div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div class="proj-title">Deadlift Form Checker</div>
+                  <span class="proj-status">WIP</span>
+                </div>
+                <div class="body-lo" style="margin-top:6px;">Side-view real-time form prediction · continuous inference.</div>
+                <div class="proj-links" style="margin-top:10px;"><a>github · coming soon</a></div>
+              </div>
+            </div>
+            <div class="proj-card soft" style="display:grid; grid-template-columns: 280px 1fr; gap:18px; padding:18px; border-style:dashed; opacity:0.65;">
+              <div class="proj-art" style="height:120px; margin:0;">[ reserved · future ]</div>
+              <div>
+                <div class="proj-title" style="color:var(--muted);">— slot for upcoming work —</div>
+                <div class="body-lo">Stacked horizontal cards expand vertically. Easy to add &amp; reorder.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-tag">05 · Education</div>
+          <div class="row" style="gap:18px;">
+            <div class="box" style="flex:1; padding:18px;">
+              <div class="label up">In progress</div>
+              <div class="h-hand" style="font-size:22px;">MS · Artificial Intelligence</div>
+              <div class="body-lo">Johns Hopkins · part-time</div>
+            </div>
+            <div class="box dashed" style="flex:1; padding:18px;">
+              <div class="label up">Completed</div>
+              <div class="h-hand" style="font-size:22px;">BS · Electrical Engineering</div>
+              <div class="body-lo">Drexel University</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-tag">06 · Contact</div>
+          <div class="box accent" style="padding:22px;">
+            <div class="h-hand" style="font-size:28px;">Open to full-time opportunities. <span style="color:var(--accent);">Say hello.</span></div>
+            <div style="margin-top:12px; font-family:var(--mono); font-size:13px;">
+              bsaleh524@gmail.com &nbsp;·&nbsp; github.com/bsaleh524 &nbsp;·&nbsp; linkedin.com/in/basem-saleh
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Tab switcher
+  const tabs = document.querySelectorAll('#tabs .tab');
+  const wfs = document.querySelectorAll('.wf');
+  tabs.forEach(t => t.addEventListener('click', () => {
+    const i = t.getAttribute('data-i');
+    tabs.forEach(x => x.setAttribute('aria-selected', x === t ? 'true' : 'false'));
+    wfs.forEach(w => {
+      if (w.getAttribute('data-i') === i) w.removeAttribute('hidden');
+      else w.setAttribute('hidden', '');
+    });
+    window.scrollTo({top: 0, behavior: 'instant'});
+  }));
+
+  // ── Constellation star tooltips ──
+  (function constellation() {
+    // tooltip element
+    const tip = document.createElement('div');
+    tip.className = 'star-tip';
+    tip.innerHTML = '<div class="tip-cat"></div><div class="tip-label"></div><div class="tip-body"></div>';
+    document.body.appendChild(tip);
+    const tCat   = tip.querySelector('.tip-cat');
+    const tLabel = tip.querySelector('.tip-label');
+    const tBody  = tip.querySelector('.tip-body');
+
+    let activeGrp = null;
+    function show(grp, x, y) {
+      tCat.textContent   = grp.getAttribute('data-cat') || '';
+      tLabel.textContent = grp.getAttribute('data-label') || '';
+      tBody.textContent  = grp.getAttribute('data-body') || '';
+      tip.classList.add('show');
+      position(x, y);
+      activeGrp = grp;
+    }
+    function hide() {
+      tip.classList.remove('show');
+      activeGrp = null;
+    }
+    function position(x, y) {
+      // flip horizontally near the right edge
+      const tw = tip.offsetWidth || 280;
+      const th = tip.offsetHeight || 100;
+      let tx = x + 14, ty = y + 18;
+      if (tx + tw > window.innerWidth - 16) tx = x - tw - 14;
+      if (ty + th > window.innerHeight - 16) ty = y - th - 14;
+      tip.style.left = tx + 'px';
+      tip.style.top  = ty + 'px';
+    }
+
+    document.querySelectorAll('.v2-net .star-grp').forEach(grp => {
+      grp.addEventListener('mouseenter', (e) => show(grp, e.clientX, e.clientY));
+      grp.addEventListener('mousemove',  (e) => { if (activeGrp === grp) position(e.clientX, e.clientY); });
+      grp.addEventListener('mouseleave', hide);
+      // a11y: keyboard focusable
+      grp.setAttribute('tabindex', '0');
+      grp.addEventListener('focus', (e) => {
+        const r = grp.getBoundingClientRect();
+        show(grp, r.left + r.width / 2, r.top + r.height / 2);
+      });
+      grp.addEventListener('blur', hide);
+    });
+  })();
+</script>
+
+<script src="image-slot.js"></script>
+<!-- ====== Tweaks panel (React) ====== -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<div id="tweaks-root"></div>
+<script type="text/babel">
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "accent": "#c9a14a",
+    "palette": [
+      "#0d1b2a",
+      "#f0efea",
+      "#c9a14a"
+    ],
+    "typeDirection": "sketchnote",
+    "sketchiness": 1,
+    "showAnnotations": true
+  }/*EDITMODE-END*/;
+
+  const TYPE_DIRECTIONS = {
+    sketchnote: { hand: "'Kalam', cursive", label: "'Patrick Hand', cursive", note: "'Caveat', cursive" },
+    fieldnotes: { hand: "'Caveat', cursive", label: "'Special Elite', monospace", note: "'Gloria Hallelujah', cursive" },
+    architect:  { hand: "'Architects Daughter', cursive", label: "'Shadows Into Light', cursive", note: "'Caveat', cursive" }
+  };
+
+  function TweaksApp() {
+    const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+    React.useEffect(() => {
+      const root = document.documentElement;
+      root.style.setProperty('--accent', t.accent);
+      // derive soft from accent
+      root.style.setProperty('--accent-soft', t.accent + '2e');
+      // ink/paper from palette
+      if (t.palette && t.palette.length >= 2) {
+        root.style.setProperty('--ink', t.palette[0]);
+        root.style.setProperty('--paper', t.palette[1]);
+      }
+      // typography direction
+      const td = TYPE_DIRECTIONS[t.typeDirection] || TYPE_DIRECTIONS.sketchnote;
+      root.style.setProperty('--hand', td.hand);
+      root.style.setProperty('--label', td.label);
+      root.style.setProperty('--note', td.note);
+      // sketchiness: rotate the wf cards slightly
+      document.querySelectorAll('.wf-pin, .wf-stamp').forEach(el => {
+        el.style.display = t.sketchiness > 0 ? '' : 'none';
+      });
+      document.querySelectorAll('.callout, .note, .note-line').forEach(el => {
+        el.style.display = t.showAnnotations ? '' : 'none';
+      });
+    }, [t]);
+
+    return (
+      <TweaksPanel title="Wireframe tweaks">
+        <TweakSection label="Accent" />
+        <TweakColor label="accent" value={t.accent}
+          options={['#c9a14a', '#d97757', '#c1473a', '#1f8a5b', '#2a6fdb', '#7a5ae0']}
+          onChange={(v) => setTweak('accent', v)} />
+        <TweakSection label="Palette" />
+        <TweakColor label="ink / paper" value={t.palette}
+          options={[
+            ['#0d1b2a', '#f0efea', '#c9a14a'],
+            ['#1a1a1a', '#f6f3ec', '#d97757'],
+            ['#12151a', '#f5edd6', '#c9a14a'],
+            ['#1a1a1a', '#f6f3ec', '#1f8a5b'],
+            ['#221b14', '#efeadd', '#c9a14a']
+          ]}
+          onChange={(v) => setTweak('palette', v)} />
+        <TweakSection label="Type direction" />
+        <TweakRadio label="family" value={t.typeDirection}
+          options={['sketchnote', 'fieldnotes', 'architect']}
+          onChange={(v) => setTweak('typeDirection', v)} />
+        <TweakSection label="Notes" />
+        <TweakToggle label="show annotations" value={t.showAnnotations}
+          onChange={(v) => setTweak('showAnnotations', v)} />
+        <TweakRadio label="markup" value={t.sketchiness > 0 ? 'on' : 'off'}
+          options={['off', 'on']}
+          onChange={(v) => setTweak('sketchiness', v === 'on' ? 1 : 0)} />
+      </TweaksPanel>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<TweaksApp />);
+</script>
+
+</body>
+</html>

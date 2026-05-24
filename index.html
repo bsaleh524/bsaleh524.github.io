@@ -1,643 +1,1268 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Basem Saleh — Machine Learning Engineer. Defense ML, signal processing, computer vision, and agents." />
+<meta property="og:title" content="Basem Saleh — Machine Learning Engineer" />
+<meta property="og:description" content="Portfolio · Lockheed Martin · Johns Hopkins MS AI" />
+<title>Basem Saleh — Machine Learning Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Caveat:wght@400;700&family=Gloria+Hallelujah&family=Architects+Daughter&family=Shadows+Into+Light&family=Special+Elite&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f6f3ec;
+    --paper-2: #efeadd;
+    --rule: #c9c2b1;
+    --muted: #7a7466;
+    --accent: #d49449;
+    --accent-soft: rgba(212, 148, 73, 0.22);
+    --hand: 'Kalam', cursive;
+    --label: 'Patrick Hand', cursive;
+    --note: 'Caveat', cursive;
+    --sans: 'Inter', system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--hand); }
+  body { min-height: 100vh; }
 
-        <meta name="description" content="">
-        <meta name="author" content="TemplateMo">
+  /* TOP CHROME ---------------------------------------------------------- */
+  .chrome {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--paper);
+    border-bottom: 1.5px dashed var(--rule);
+    padding: 12px 24px 0;
+  }
+  .chrome-top {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap; padding-bottom: 10px;
+  }
+  .chrome-title {
+    font-family: var(--note); font-weight: 700; font-size: 22px; letter-spacing: 0.01em;
+  }
+  .chrome-title small { font-family: var(--label); font-weight: 400; font-size: 13px; color: var(--muted); margin-left: 10px;}
+  .chrome-meta { font-family: var(--label); font-size: 13px; color: var(--muted); }
+  .chrome-meta .dot { color: var(--accent); }
 
-        <title>First Portfolio Bootstrap 5 Theme</title>
+  .tabs {
+    display: flex; gap: 6px; padding-bottom: 0; overflow-x: auto;
+  }
+  .tab {
+    appearance: none; background: transparent; border: 1.5px dashed var(--rule);
+    border-bottom: none; padding: 9px 16px 8px;
+    font-family: var(--label); font-size: 15px; color: var(--muted);
+    border-top-left-radius: 10px 14px; border-top-right-radius: 10px 14px;
+    cursor: default; white-space: nowrap; position: relative; bottom: -1.5px;
+    transform: rotate(-0.2deg);
+  }
+  .tab:nth-child(2n) { transform: rotate(0.3deg); }
+  .tab:nth-child(3n) { transform: rotate(-0.1deg); }
+  .tab[aria-selected="true"] {
+    color: var(--ink); background: var(--paper);
+    border-color: var(--ink); border-bottom: 1.5px solid var(--paper);
+    font-weight: 700;
+  }
+  .tab .num { color: var(--accent); margin-right: 6px; font-weight: 700; }
 
-        <!-- CSS FILES -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  /* STAGE --------------------------------------------------------------- */
+  .stage { padding: 28px 24px 80px; }
+  .wf {
+    max-width: 1240px; margin: 0 auto;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    box-shadow: 6px 6px 0 rgba(26,26,26,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .wf::before {
+    /* paper texture via subtle gradient */
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(1200px 800px at 80% -10%, rgba(0,0,0,0.025), transparent 60%),
+      radial-gradient(800px 600px at -10% 90%, rgba(0,0,0,0.03), transparent 60%);
+  }
+  .wf-pin {
+    position: absolute; top: -12px; left: 24px;
+    background: var(--accent); color: #fff;
+    font-family: var(--label); font-size: 12px;
+    padding: 4px 10px; border-radius: 14px;
+    transform: rotate(-3deg);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+    z-index: 2;
+  }
+  .wf-stamp {
+    position: absolute; top: 10px; right: 18px;
+    font-family: var(--note); font-size: 16px; color: var(--muted);
+    transform: rotate(2deg); z-index: 2;
+  }
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+  /* SHARED WF PRIMITIVES ----------------------------------------------- */
+  .box { border: 1.5px solid var(--ink); padding: 14px; position: relative; background: var(--paper); }
+  .box.dashed { border-style: dashed; }
+  .box.soft { border-color: var(--rule); border-style: dashed; }
+  .box.filled { background: var(--ink); color: var(--paper); }
+  .box.accent { background: var(--accent-soft); border-color: var(--accent); }
+  .placeholder {
+    background:
+      repeating-linear-gradient(135deg, transparent 0 9px, rgba(0,0,0,0.06) 9px 10px);
+    border: 1.5px dashed var(--rule);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-family: var(--label); font-size: 14px;
+    text-align: center; padding: 12px;
+  }
+  .label { font-family: var(--label); font-size: 13px; color: var(--muted); letter-spacing: 0.02em; }
+  .label.up { text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px; }
+  .h-hand { font-family: var(--hand); font-weight: 700; line-height: 1.05; }
+  .body-lo {
+    font-family: var(--sans); font-size: 13px; color: var(--muted); line-height: 1.55;
+    font-weight: 400;
+  }
+  .lorem {
+    height: 8px; background: rgba(26,26,26,0.18); border-radius: 4px; margin: 6px 0;
+  }
+  .lorem.w90 { width: 90%; } .lorem.w80 { width: 80%; } .lorem.w70 { width: 70%; }
+  .lorem.w60 { width: 60%; } .lorem.w50 { width: 50%; } .lorem.w40 { width: 40%; }
+  .lorem.w30 { width: 30%; }
+  .pill {
+    display: inline-flex; align-items: center; padding: 3px 10px;
+    border: 1.5px solid var(--ink); border-radius: 999px;
+    font-family: var(--label); font-size: 13px; background: var(--paper);
+  }
+  .pill.dashed { border-style: dashed; color: var(--muted); }
+  .pill.accent { background: var(--accent); color: white; border-color: var(--accent); }
+  .arrow { color: var(--accent); font-family: var(--note); font-size: 18px; }
+  .note {
+    font-family: var(--note); font-size: 16px; color: var(--accent);
+    transform: rotate(-2deg); display: inline-block;
+  }
+  .note-line {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--note); font-size: 17px; color: var(--accent);
+  }
+  .divider-squiggle {
+    display: block; width: 100%; height: 14px; color: var(--rule);
+  }
 
-        <link href="css/bootstrap-icons.css" rel="stylesheet">
+  /* SECTION ANCHOR LABEL */
+  .sec-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--label); font-size: 16px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.16em;
+  }
+  .sec-tag::before {
+    content: ""; width: 28px; height: 2px; background: var(--accent);
+    display: inline-block;
+  }
+  .sec-h {
+    font-family: var(--hand); font-weight: 700; font-size: 38px; margin: 6px 0 18px;
+    line-height: 1.05;
+  }
+  .sec-h .ink { color: var(--ink); }
+  .sec-h .acc { color: var(--accent); }
 
-        <link href="css/magnific-popup.css" rel="stylesheet">
+  /* WF GRID HELPERS */
+  .row { display: flex; gap: 16px; }
+  .col { display: flex; flex-direction: column; gap: 12px; }
+  .grid { display: grid; gap: 16px; }
 
-        <link href="css/templatemo-first-portfolio-style.css" rel="stylesheet">
-        
-<!--
+  /* annotations (callouts) */
+  .anno {
+    position: absolute; font-family: var(--note); font-size: 15px; color: var(--accent);
+    display: flex; align-items: center; gap: 6px; pointer-events: none;
+    transform: rotate(-2deg);
+  }
+  .anno svg { color: var(--accent); }
 
-TemplateMo 578 First Portfolio
+  /* HEADERS PER VARIATION ---------------------------------------------- */
 
-https://templatemo.com/tm-578-first-portfolio
+  /* V1 — Signal Sweep */
+  .v1 { padding: 0; }
+  .v1-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border-bottom: 1.5px solid var(--ink); }
+  .v1-hero-l { padding: 56px 48px 48px; position: relative; }
+  .v1-hero-r { padding: 28px; border-left: 1.5px dashed var(--rule); display: flex; align-items: center; justify-content: center; position: relative; background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%); }
+  .v1-eyebrow { font-family: var(--label); letter-spacing: 0.2em; text-transform: uppercase; font-size: 12px; color: var(--muted); }
+  .v1-name { font-family: var(--hand); font-weight: 700; font-size: 86px; line-height: 0.95; margin: 6px 0 4px; }
+  .v1-name .acc { color: var(--accent); }
+  .v1-title { font-family: var(--label); font-size: 22px; color: var(--ink); margin-bottom: 18px; }
+  .v1-tag {
+    font-family: var(--hand); font-weight: 300; font-style: italic;
+    font-size: 18px; color: var(--muted); max-width: 460px;
+    border-left: 3px solid var(--accent); padding: 4px 0 4px 14px;
+  }
+  .v1-ctas { display: flex; gap: 12px; margin-top: 22px; align-items: center; }
+  .v1-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border: 1.5px solid var(--ink);
+    font-family: var(--label); font-size: 16px; background: var(--paper);
+  }
+  .v1-cta.solid { background: var(--ink); color: var(--paper); }
 
--->
-    </head>
-    
-    <body>
+  .radar-wrap { position: relative; width: 380px; height: 380px; }
+  .radar-ring { position: absolute; inset: 0; border: 1.5px solid var(--ink); border-radius: 50%; }
+  .radar-ring.d { border-style: dashed; border-color: var(--rule); }
+  .radar-r2 { inset: 12% }
+  .radar-r3 { inset: 26% }
+  .radar-r4 { inset: 40% }
+  .radar-r5 { inset: 54% }
+  .radar-sweep {
+    position: absolute; left: 50%; top: 50%; width: 50%; height: 1.5px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    transform-origin: left center; transform: rotate(-32deg);
+  }
+  .radar-blip {
+    position: absolute; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .radar-cross { position: absolute; inset: 0; }
+  .radar-cross::before, .radar-cross::after {
+    content: ""; position: absolute; background: var(--rule);
+  }
+  .radar-cross::before { left: 0; right: 0; top: 50%; height: 1px; }
+  .radar-cross::after { top: 0; bottom: 0; left: 50%; width: 1px; }
+  .radar-label {
+    position: absolute; font-family: var(--mono); font-size: 10px; color: var(--muted);
+    letter-spacing: 0.1em;
+  }
 
-        <section class="preloader">
-            <div class="spinner">
-                <span class="spinner-rotate"></span>    
+  /* sections common */
+  .sec { padding: 56px 48px; border-bottom: 1.5px dashed var(--rule); position: relative; }
+  .sec:last-child { border-bottom: 0; }
+
+  /* timeline */
+  .tl { position: relative; padding-left: 36px; margin-top: 12px; }
+  .tl::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 1.5px; background: var(--ink); }
+  .tl-node {
+    position: relative; margin-bottom: 24px; padding-right: 12px;
+  }
+  .tl-node::before {
+    content: ""; position: absolute; left: -34px; top: 6px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--paper); border: 2px solid var(--ink);
+  }
+  .tl-node.acc::before { background: var(--accent); border-color: var(--accent); }
+  .tl-role { font-family: var(--hand); font-weight: 700; font-size: 22px; line-height: 1.1; }
+  .tl-meta { font-family: var(--label); color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+  .tl-bullets { list-style: none; padding: 0; margin: 0; }
+  .tl-bullets li {
+    font-family: var(--sans); font-size: 13.5px; color: var(--ink);
+    padding-left: 18px; position: relative; line-height: 1.5; margin-bottom: 6px;
+    font-weight: 400;
+  }
+  .tl-bullets li::before {
+    content: "→"; position: absolute; left: 0; color: var(--accent);
+  }
+
+  /* skill cloud */
+  .skill-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* V2 — Constellation */
+  .v2 { background: var(--ink); color: var(--paper); }
+  .v2 .label, .v2 .v2-eyebrow { color: rgba(246,243,236,0.6); }
+  .v2 .box { background: rgba(246,243,236,0.04); border-color: rgba(246,243,236,0.25); color: var(--paper); }
+  .v2 .box.dashed { border-style: dashed; }
+  .v2 .lorem { background: rgba(246,243,236,0.18); }
+  .v2 .placeholder {
+    background: repeating-linear-gradient(135deg, transparent 0 9px, rgba(246,243,236,0.07) 9px 10px);
+    border-color: rgba(246,243,236,0.25); color: rgba(246,243,236,0.5);
+  }
+  .v2 .pill { background: transparent; border-color: rgba(246,243,236,0.45); color: var(--paper); }
+  .v2 .pill.accent { background: var(--accent); border-color: var(--accent); }
+  .v2-hero {
+    position: relative; height: 540px; overflow: hidden;
+    border-bottom: 1.5px solid rgba(246,243,236,0.2);
+  }
+  /* Constellation: 85% size, pulled up, flipped horizontally */
+  .v2-net { position: absolute; left: 0; right: 0; top: 0; width: 100%; height: 100%; transform: translateY(-50px) scale(-0.85, 0.85); transform-origin: center center; }
+  .v2-hero-content {
+    position: absolute; inset: 0; display: flex; align-items: flex-end;
+    padding: 48px; justify-content: space-between; gap: 48px;
+    pointer-events: none;
+  }
+  .v2-hero-content > * { pointer-events: auto; }
+  /* Constellation stars - hover, twinkle, pulse */
+  .v2-net .star-grp { cursor: help; }
+  .v2-net .hit { fill: transparent; pointer-events: all; }
+  .v2-net .star {
+    fill: rgba(246,243,236,0.85);
+    transition: r 0.18s ease, fill 0.18s ease;
+    animation: twinkle 4.5s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+    transform-origin: center; transform-box: fill-box;
+  }
+  .v2-net .star-grp.lit .star {
+    fill: #e8b265;
+    animation: lit-pulse 2.6s ease-in-out infinite;
+  }
+  .v2-net .star-grp:hover .star,
+  .v2-net .star-grp:focus-within .star {
+    fill: var(--accent);
+    r: 7;
+    animation: none;
+  }
+  .v2-net .lit-glow circle {
+    animation: glow-pulse 2.6s ease-in-out infinite;
+    transform-origin: center; transform-box: fill-box;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+  }
+  @keyframes lit-pulse {
+    0%, 100% { opacity: 0.85; }
+    50%      { opacity: 1; }
+  }
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.25); }
+  }
+  /* Network edges — subtle data-flow current */
+  .v2-net .edges line {
+    stroke-dasharray: 4 10;
+    animation: edge-flow 12s linear infinite;
+  }
+  @keyframes edge-flow {
+    to { stroke-dashoffset: -140; }
+  }
+  /* Travelling pulses on the edges that touch a lit node */
+  .v2-net .pulse {
+    fill: var(--accent);
+    filter: drop-shadow(0 0 4px #e8b265);
+  }
+  .star-tip {
+    position: fixed; z-index: 100;
+    max-width: 320px; min-width: 220px;
+    padding: 14px 16px;
+    background: var(--paper); color: var(--ink);
+    border: 1.5px solid var(--accent);
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.25);
+    pointer-events: none; opacity: 0;
+    transform: translate(14px, 18px) translateY(4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    font-family: var(--label);
+  }
+  .star-tip.show { opacity: 1; transform: translate(14px, 18px) translateY(0); }
+  .star-tip .tip-cat {
+    display: inline-block; font-size: 10px; letter-spacing: 0.18em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 4px;
+  }
+  .star-tip .tip-label {
+    font-family: var(--hand); font-weight: 700; font-size: 18px;
+    line-height: 1.15; margin-bottom: 6px; color: var(--ink);
+  }
+  .star-tip .tip-body {
+    font-family: var(--sans);
+    font-size: 12.5px; line-height: 1.55; color: var(--ink);
+    font-weight: 400;
+  }
+  .star-hint {
+    position: absolute; left: 50%; bottom: 36px;
+    transform: translateX(-50%);
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--note); font-size: 22px; color: var(--accent);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .star-hint .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(232, 178, 101, 0.18); }
+  .v2-name {
+    font-family: var(--hand); font-weight: 700; font-size: 92px; line-height: 0.88;
+    color: var(--paper);
+  }
+  .v2-name .acc { color: var(--accent); }
+  .v2-tag-r {
+    max-width: 320px; text-align: right; align-self: flex-end;
+  }
+  .v2-tag-r .label.up { color: var(--accent); }
+  .v2-tag-r .quote {
+    font-family: var(--hand); font-style: italic; font-weight: 300; font-size: 18px;
+    color: rgba(246,243,236,0.9); margin-top: 6px;
+  }
+  .v2-tl { position: absolute; top: 28px; left: 48px; display: flex; gap: 24px; align-items: center; }
+  /* faded vertical timeline rail behind the experience stack */
+  .exp-stack::before {
+    content: "";
+    position: absolute;
+    left: 48px; top: -8px; bottom: -8px;
+    width: 0;
+    border-left: 2.5px dashed rgba(246, 243, 236, 0.14);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .exp-stack > .box {
+    position: relative; z-index: 1;
+    background: rgba(246, 243, 236, 0.045);
+    border-color: rgba(246, 243, 236, 0.18);
+    backdrop-filter: blur(2px);
+  }
+  .v2-tl .pill { color: var(--paper); border-color: rgba(246,243,236,0.45); }
+  .v2-tl .pill.accent { background: var(--accent); border-color: var(--accent); }
+
+  .v2 .sec { border-bottom-color: rgba(246,243,236,0.15); }
+  .v2 .tl::before { background: rgba(246,243,236,0.3); }
+  .v2 .tl-node::before { background: var(--ink); border-color: rgba(246,243,236,0.5); }
+  .v2 .tl-node.acc::before { background: var(--accent); border-color: var(--accent); }
+  .v2 .tl-bullets li { color: rgba(246,243,236,0.85); }
+
+  /* V3 — Editorial Mark */
+  .v3 { background: var(--paper); }
+  .v3-hero {
+    display: grid; grid-template-columns: 1fr 1fr; align-items: stretch;
+    border-bottom: 1.5px solid var(--ink);
+    min-height: 480px;
+  }
+  .v3-hero-l {
+    padding: 48px; display: flex; flex-direction: column; justify-content: space-between;
+    border-right: 1.5px solid var(--ink);
+  }
+  .v3-hero-r {
+    padding: 24px; display: flex; align-items: center; justify-content: center;
+    background: var(--paper-2); position: relative;
+  }
+  .v3-kicker { font-family: var(--label); letter-spacing: 0.3em; font-size: 11px; text-transform: uppercase; color: var(--muted); }
+  .v3-name {
+    font-family: var(--hand); font-weight: 700; font-size: 110px; line-height: 0.88;
+    margin: 14px 0 10px;
+    /* serif-ish via italic + tracking */
+  }
+  .v3-name .underline { display: inline-block; background: linear-gradient(transparent 70%, var(--accent) 70%, var(--accent) 88%, transparent 88%); padding: 0 4px; }
+  .v3-meta-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    border-top: 1.5px dashed var(--rule); padding-top: 18px; margin-top: 18px;
+  }
+  .v3-meta-cell .v3-num { font-family: var(--hand); font-weight: 700; font-size: 30px; color: var(--accent); }
+  .v3-meta-cell .label { font-size: 12px; }
+
+  /* scarab geometric */
+  .scarab { width: 320px; height: 380px; position: relative; }
+
+  /* V3 sec */
+  .v3-sec { display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 56px 48px; border-bottom: 1.5px solid var(--ink); }
+  .v3-sec:last-child { border-bottom: 0; }
+  .v3-marg { position: sticky; top: 90px; align-self: start; }
+  .v3-marg .sec-h { font-size: 28px; margin: 8px 0; }
+  .v3-marg .body-lo { margin-top: 14px; }
+  .v3-marg .note { font-size: 17px; }
+  .v3-content { min-width: 0; }
+
+  /* V4 — Cluster Resolve / Bento */
+  .v4-hero {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 0;
+    border-bottom: 1.5px solid var(--ink);
+    min-height: 420px;
+  }
+  .v4-hero-l { padding: 44px 40px; display: flex; flex-direction: column; gap: 14px; justify-content: center; border-right: 1.5px dashed var(--rule); }
+  .v4-hero-r { padding: 24px; display: flex; align-items: center; justify-content: center; background: var(--paper-2); position: relative; }
+  .v4-name { font-family: var(--hand); font-weight: 700; font-size: 68px; line-height: 0.95; }
+  .v4-bento {
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 110px;
+    padding: 40px;
+  }
+  .v4-bento .box { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .b-1 { grid-column: span 3; grid-row: span 2; }
+  .b-2 { grid-column: span 3; grid-row: span 1; }
+  .b-3 { grid-column: span 3; grid-row: span 1; }
+  .b-4 { grid-column: span 2; grid-row: span 2; }
+  .b-5 { grid-column: span 2; grid-row: span 1; }
+  .b-6 { grid-column: span 2; grid-row: span 1; }
+  .b-7 { grid-column: span 4; grid-row: span 1; }
+
+  /* V5 — Split Frame */
+  .v5 { display: grid; grid-template-columns: 320px 1fr; min-height: 100%; }
+  .v5-rail {
+    border-right: 1.5px solid var(--ink);
+    padding: 36px 28px; position: sticky; top: 0; align-self: start;
+    background: var(--paper-2);
+    height: auto;
+  }
+  .v5-name { font-family: var(--hand); font-weight: 700; font-size: 38px; line-height: 1; margin: 14px 0 2px; }
+  .v5-title { font-family: var(--label); font-size: 16px; color: var(--ink); margin-bottom: 18px; }
+  .v5-sig {
+    width: 100%; aspect-ratio: 1/1; border: 1.5px dashed var(--rule);
+    margin: 14px 0 20px; position: relative; overflow: hidden;
+    background: var(--paper);
+  }
+  .v5-nav { display: flex; flex-direction: column; gap: 6px; margin-top: 18px; }
+  .v5-nav a {
+    font-family: var(--label); font-size: 15px; color: var(--muted);
+    text-decoration: none; padding: 4px 0;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .v5-nav a::before {
+    content: ""; width: 14px; height: 1.5px; background: var(--rule);
+  }
+  .v5-nav a.curr { color: var(--ink); font-weight: 700; }
+  .v5-nav a.curr::before { background: var(--accent); width: 28px; }
+  .v5-contact { margin-top: 22px; padding-top: 18px; border-top: 1.5px dashed var(--rule); display: flex; flex-direction: column; gap: 4px; font-family: var(--mono); font-size: 12px; color: var(--ink); }
+  .v5-contact a { color: var(--ink); text-decoration: none; }
+  .v5-contact a:hover { color: var(--accent); }
+  .v5-main { padding: 0; }
+  .v5 .sec { padding: 56px 56px; border-bottom: 1.5px dashed var(--rule); }
+  .v5 .sec:last-child { border-bottom: 0; }
+
+  /* PROJECT CARDS */
+  .proj-card {
+    border: 1.5px solid var(--ink); padding: 18px; background: var(--paper);
+    display: flex; flex-direction: column; gap: 10px; position: relative;
+  }
+  .proj-card .proj-art {
+    height: 160px;
+    background: repeating-linear-gradient(135deg, transparent 0 9px, rgba(0,0,0,0.06) 9px 10px);
+    border: 1.5px dashed var(--rule);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-family: var(--label);
+    margin-bottom: 6px;
+  }
+  .proj-title { font-family: var(--hand); font-weight: 700; font-size: 22px; line-height: 1.1; }
+  .proj-status {
+    display: inline-block; padding: 2px 8px; border-radius: 999px;
+    background: var(--accent-soft); color: var(--ink);
+    font-family: var(--label); font-size: 12px;
+    border: 1px solid var(--accent);
+  }
+  .proj-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+  .proj-links a {
+    font-family: var(--mono); font-size: 11px; color: var(--ink);
+    border: 1px dashed var(--rule); padding: 3px 8px; text-decoration: none;
+  }
+
+  /* footer */
+  .foot {
+    padding: 40px 48px; background: var(--ink); color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    flex-wrap: wrap;
+  }
+  .foot .v2-hf, .foot .foot-line {
+    font-family: var(--hand); font-weight: 300; font-size: 22px; max-width: 420px;
+  }
+  .foot a { color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 13px; display: block; }
+  .foot a + a { margin-top: 4px; }
+
+  /* tweaks panel injects */
+  .twk-swatch { width: 18px; height: 18px; border-radius: 50%; display: inline-block; vertical-align: middle; margin-right: 6px; }
+
+  /* hidden by default */
+  .wf[hidden] { display: none; }
+
+  /* annotation callouts on the wireframe edges */
+  .callout {
+    position: absolute; display: flex; gap: 6px; align-items: flex-start;
+    font-family: var(--note); color: var(--accent); font-size: 16px; max-width: 200px;
+    pointer-events: none; line-height: 1.15;
+  }
+  .callout .arr {
+    font-size: 22px; line-height: 1; transform: translateY(-3px);
+  }
+
+  /* responsive cap */
+  @media (max-width: 1100px) {
+    .v1-hero, .v3-hero, .v4-hero { grid-template-columns: 1fr; }
+    .v3-sec, .v5 { grid-template-columns: 1fr; }
+    .v4-bento { grid-template-columns: repeat(3, 1fr); }
+    .b-1, .b-2, .b-3, .b-4, .b-5, .b-6, .b-7 { grid-column: span 3; }
+  }
+</style>
+
+<style>
+  /* ────── Polish overrides (production) ────── */
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+  /* Remove wireframe stage chrome — V2 IS the page */
+  .stage { padding: 0; }
+  .wf {
+    max-width: none; margin: 0; box-shadow: none; border: 0;
+    background: var(--ink);
+  }
+  .wf::before { display: none; }
+
+  /* Center the V2 content + cap width like a real site */
+  .v2 .v2-hero,
+  .v2 > .sec,
+  .v2 > .v2-hero { width: 100%; }
+  .v2 .v2-hero,
+  .v2 .sec { padding-left: max(48px, calc((100% - 1240px) / 2)); padding-right: max(48px, calc((100% - 1240px) / 2)); }
+  .v2 .v2-hero { padding-left: 0; padding-right: 0; } /* hero is full-bleed; inner padding handles content */
+
+  /* Anchored sections offset so jump-targets don't crash into header */
+  #v2-experience, #v2-projects { scroll-margin-top: 24px; }
+
+  /* Real hover/focus states */
+  .pill {
+    cursor: default;
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  a.pill {
+    cursor: pointer; text-decoration: none;
+  }
+  a.pill:hover {
+    background: var(--paper); color: var(--ink); border-color: var(--paper);
+    transform: translateY(-1px);
+  }
+  a.pill.accent:hover {
+    background: var(--paper); color: var(--accent); border-color: var(--paper);
+  }
+  a.pill:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px;
+  }
+  .pill.dim {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  /* Contact links */
+  .contact-link {
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1.5px solid transparent;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+    padding-bottom: 1px; width: fit-content;
+  }
+  .contact-link:hover {
+    border-bottom-color: var(--ink);
+  }
+  .contact-link:focus-visible {
+    outline: 2px solid var(--ink); outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Resume download underline */
+  .v2 a[href="resume.pdf"] {
+    transition: color 0.15s ease;
+  }
+  .v2 a[href="resume.pdf"]:hover { color: var(--accent) !important; }
+
+  /* Global focus ring (a11y) */
+  a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px;
+  }
+
+  /* Quiet down the star-hint — orientation, not chrome */
+  .star-hint { font-size: 28px; opacity: 0.9; }
+  .star-hint:hover { opacity: 1; }
+
+  /* Reduced motion — turn off twinkles + pulses + edge flow */
+  @media (prefers-reduced-motion: reduce) {
+    .v2-net .star,
+    .v2-net .star-grp.lit .star,
+    .v2-net .lit-glow circle,
+    .v2-net .edges line { animation: none !important; }
+    .v2-net .pulses { display: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* Star hit area — make the entire star-grp clickable, and prevent overlays from blocking hovers */
+  .v2-net .star-grp,
+  .v2-net .star-grp * { pointer-events: all; }
+  .v2-net .lit-glow, .v2-net .lit-glow circle,
+  .v2-net .pulses, .v2-net .pulses circle,
+  .v2-net .edges, .v2-net .edges line { pointer-events: none; }
+
+  /* Hero bottom group: star-hint + CTAs, centered under the constellation */
+  .hero-bottom {
+    position: absolute; left: 50%; bottom: 28px;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center;
+    gap: 14px; z-index: 3;
+  }
+  .hero-bottom .star-hint {
+    position: static; transform: none;
+    left: auto; bottom: auto;
+  }
+  .hero-ctas {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .hero-ctas-row { display: flex; gap: 10px; }
+  .hero-resume {
+    font-family: var(--label); font-size: 14px;
+    color: rgba(246,243,236,0.75); text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+  }
+  .hero-resume:hover { color: var(--accent); }
+
+  /* Contact icons — large, themed in ink (no brand colors) */
+  .contact-icons {
+    display: flex; justify-content: space-around; align-items: center;
+    gap: 16px; margin-top: 16px;
+  }
+  .contact-icon {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    color: var(--ink); text-decoration: none;
+    padding: 14px 6px; border-radius: 6px;
+    transition: transform 0.18s ease, background 0.18s ease;
+  }
+  .contact-icon svg {
+    width: 100%; max-width: 56px; height: auto;
+    display: block;
+  }
+  .contact-icon:hover {
+    background: rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .contact-icon:focus-visible {
+    outline: 2px solid var(--ink); outline-offset: 2px;
+  }
+
+  /* ───────── Tablet / mid-width (prevent hero overlap) ───────── */
+  @media (max-width: 1024px) {
+    .v2-hero { height: auto; min-height: 540px; }
+    .v2-hero-content {
+      position: static;
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      gap: 22px;
+      padding: 28px 32px 0;
+    }
+    .v2-tag-r {
+      max-width: 100%; text-align: left; align-self: stretch;
+      border-top: 1px dashed rgba(246,243,236,0.18);
+      padding-top: 16px;
+    }
+    .hero-bottom {
+      position: static; transform: none;
+      left: auto; bottom: auto;
+      padding: 20px 32px 28px;
+      align-items: flex-start;
+    }
+    .v2-name { font-size: 72px; }
+  }
+
+  /* ───────── Mobile / narrow screens ───────── */
+  @media (max-width: 760px) {
+    /* Sections: tighter padding */
+    .v2 .sec { padding: 40px 20px; }
+    .v2 .v2-hero, .v2 .sec { padding-left: 20px; padding-right: 20px; }
+
+    /* HERO ------------------------------------------ */
+    .v2-hero { height: auto; min-height: 560px; padding: 0; }
+    .v2-net { position: relative; height: 280px; width: 100%; display: block; }
+    .v2-hero-content {
+      position: static;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: flex-start;
+      gap: 24px;
+      padding: 24px 20px 0;
+    }
+    .v2-name { font-size: 56px; line-height: 0.9; }
+    .v2-tag-r {
+      max-width: 100%; text-align: left; align-self: stretch;
+      border-top: 1px dashed rgba(246,243,236,0.2);
+      padding-top: 18px;
+    }
+    .v2-tag-r .quote { font-size: 17px !important; line-height: 1.45 !important; }
+
+    /* Hero bottom CTAs — flow inline below content, not absolute */
+    .hero-bottom {
+      position: static; transform: none;
+      left: auto; bottom: auto;
+      padding: 20px;
+      align-items: flex-start;
+    }
+    .hero-ctas { align-items: stretch; width: 100%; }
+    .hero-ctas-row { flex-direction: column; width: 100%; gap: 8px; }
+    .hero-ctas-row .pill {
+      justify-content: center; text-align: center;
+      padding: 10px 16px; font-size: 15px;
+    }
+    .star-hint { font-size: 18px; white-space: normal; text-align: left; }
+
+    /* SECTION HEADINGS ------------------------------ */
+    .sec-h { font-size: 28px; line-height: 1.1; margin-bottom: 14px; }
+    .sec-tag { font-size: 13px; letter-spacing: 0.14em; }
+
+    /* ABOUT ----------------------------------------- */
+    .v2 section.sec .row,
+    .v2 section.sec[id] .row {
+      flex-direction: column; gap: 24px !important;
+    }
+    .v2 section.sec .row > div[style*="flex:0 0 320px"] {
+      flex: 1 1 auto !important; width: 100%;
+    }
+    .v2 section.sec .row > div[style*="flex:1"] {
+      max-width: 100% !important;
+    }
+    image-slot { width: 100% !important; height: 220px !important; }
+
+    /* EXPERIENCE ------------------------------------ */
+    .exp-stack { gap: 18px !important; }
+    .exp-stack > .box {
+      margin-left: 0 !important; margin-right: 0 !important;
+      padding: 18px !important;
+    }
+    .exp-stack::before {
+      left: 18px !important;
+    }
+    .exp-stack > .box > div[style*="space-between"] {
+      flex-direction: column; align-items: flex-start !important; gap: 6px;
+    }
+    .h-hand { font-size: 20px !important; }
+    .exp-stack .h-hand { font-size: 19px !important; }
+    .tl-bullets li { font-size: 13px; }
+
+    /* PROJECTS -------------------------------------- */
+    #v2-projects .grid {
+      grid-template-columns: 1fr !important;
+      gap: 16px !important;
+    }
+    .proj-card .proj-art,
+    #v2-projects image-slot { height: 160px !important; }
+
+    /* EDU + CONTACT --------------------------------- */
+    .v2 section.sec:last-of-type .row {
+      flex-direction: column; gap: 20px !important;
+    }
+    .v2 section.sec:last-of-type .row > div { flex: 1 1 auto !important; }
+    .contact-icons { gap: 10px; }
+    .contact-icon svg { max-width: 44px; }
+
+    /* Pills wrap cleanly */
+    .pill { font-size: 12px; }
+  }
+
+  /* Extra-narrow phones */
+  @media (max-width: 380px) {
+    .v2-name { font-size: 46px; }
+    .v2 .sec, .v2 .v2-hero { padding-left: 16px; padding-right: 16px; }
+    .sec-h { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<main class="stage" id="stage">
+
+
+  <section class="wf v2" data-i="1">
+
+    <div class="v2-hero">
+      <svg class="v2-net" viewBox="0 0 1200 540" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#e2a85a" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#e2a85a" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g class="edges" stroke="rgba(246,243,236,0.18)" stroke-width="0.7" fill="none">
+          <!-- edges (precomputed-ish) -->
+          <line x1="180" y1="120" x2="420" y2="80"/>
+          <line x1="180" y1="120" x2="320" y2="240"/>
+          <line x1="420" y1="80" x2="600" y2="180"/>
+          <line x1="420" y1="80" x2="540" y2="320"/>
+          <line x1="320" y1="240" x2="540" y2="320"/>
+          <line x1="320" y1="240" x2="480" y2="420"/>
+          <line x1="600" y1="180" x2="780" y2="100"/>
+          <line x1="600" y1="180" x2="820" y2="280"/>
+          <line x1="540" y1="320" x2="720" y2="380"/>
+          <line x1="540" y1="320" x2="820" y2="280"/>
+          <line x1="780" y1="100" x2="980" y2="160"/>
+          <line x1="780" y1="100" x2="1060" y2="60"/>
+          <line x1="820" y1="280" x2="1020" y2="340"/>
+          <line x1="720" y1="380" x2="1020" y2="340"/>
+          <line x1="720" y1="380" x2="640" y2="460"/>
+          <line x1="480" y1="420" x2="640" y2="460"/>
+          <line x1="980" y1="160" x2="1060" y2="60"/>
+          <line x1="980" y1="160" x2="1020" y2="340"/>
+          <line x1="180" y1="120" x2="120" y2="320"/>
+          <line x1="120" y1="320" x2="320" y2="240"/>
+          <line x1="120" y1="320" x2="240" y2="460"/>
+          <line x1="240" y1="460" x2="480" y2="420"/>
+        </g>
+        <g class="pulses">
+          <!-- pulses travel TOWARD the 4 lit headliner nodes; staggered so the field feels alive -->
+          <!-- → $1M+ (600,180) -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="420;600" dur="4.2s" begin="0s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="80;180"  dur="4.2s" begin="0s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4.2s" begin="0s" repeatCount="indefinite"/>
+          </circle>
+          <!-- → RAG (540,320) -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="820;540" dur="5.0s" begin="0.8s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="280;320" dur="5.0s" begin="0.8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="5.0s" begin="0.8s" repeatCount="indefinite"/>
+          </circle>
+          <!-- → AI Gov (320,240) -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="120;320" dur="4.6s" begin="1.6s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="320;240" dur="4.6s" begin="1.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4.6s" begin="1.6s" repeatCount="indefinite"/>
+          </circle>
+          <!-- → KubeFlow (780,100) -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="1060;780" dur="5.4s" begin="2.4s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="60;100"   dur="5.4s" begin="2.4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="5.4s" begin="2.4s" repeatCount="indefinite"/>
+          </circle>
+          <!-- → KubeFlow (780,100) from below -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="980;780" dur="4.8s" begin="3.2s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="160;100" dur="4.8s" begin="3.2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4.8s" begin="3.2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- → AI Gov (320,240) from upper left -->
+          <circle class="pulse" r="2.5">
+            <animate attributeName="cx" values="180;320" dur="4.0s" begin="4.0s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="120;240" dur="4.0s" begin="4.0s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4.0s" begin="4.0s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+        <g fill="rgba(246,243,236,0.85)" class="stars-g">
+          <g class="star-grp" data-label="Kalman filter target tracker" data-body="JAX-based Kalman filter as a fighter-jet payload — gives the RL agent a continuous, low-noise multi-target observation space even when on-board radar loses focus." data-cat="ML">
+            <circle class="hit" cx="180" cy="120" r="22"/>
+            <circle class="star" cx="180" cy="120" r="3" style="--d:0s"/>
+          </g>
+          <g class="star-grp" data-label="Multi-agent RL · 20% faster missions" data-body="Trained MLP-based multi-agent RL in JAX with bespoke reward shaping. Achieved 20% faster mission completion than a deterministic baseline through learned cooperative behavior." data-cat="ML">
+            <circle class="hit" cx="420" cy="80" r="22"/>
+            <circle class="star" cx="420" cy="80" r="3" style="--d:0.6s"/>
+          </g>
+          <g class="star-grp lit" data-label="AI Governance framework" data-body="Primary author on a 3-person team — translated DoD 3000.09, corporate AI policy, and the 5 AI ethical principles into a compliance matrix, review-board charter, and tiered escalation process. Accepted; rolling out across high-impact AI programs." data-cat="STRAT">
+            <circle class="hit" cx="320" cy="240" r="26"/>
+            <circle class="star" cx="320" cy="240" r="4"/>
+          </g>
+          <g class="star-grp lit" data-label="$1M+ funding · RF classifier" data-body="ResNet50 in PyTorch trained on field-collected IQ spectrograms; exported to ONNX and deployed on radio hardware for real-time inference. 98% accuracy on customer signatures — contributed directly to Phase 2 funding." data-cat="ML">
+            <circle class="hit" cx="600" cy="180" r="26"/>
+            <circle class="star" cx="600" cy="180" r="4"/>
+          </g>
+          <g class="star-grp lit" data-label="LLM · RAG Cameo assistant" data-body="Stood up Weaviate on the production endpoint and curated the retrieval corpus (block-creation instructions, architecture standards) for a hackathon LLM that drops standards-compliant Cameo architectures straight into engineers' workspaces." data-cat="LLM">
+            <circle class="hit" cx="540" cy="320" r="26"/>
+            <circle class="star" cx="540" cy="320" r="4"/>
+          </g>
+          <g class="star-grp lit" data-label="KubeFlow + LakeFS · 1d → 1h" data-body="Led automation of the AFSIM mission-sim + data pipeline. Ported the headless AFSIM image from RHEL to Ubuntu for our MLOps stack, added a GPU plugin, wired KubeFlow with LakeFS auto-transfer. One-day manual run → 1-hour hands-off." data-cat="MLOPS">
+            <circle class="hit" cx="780" cy="100" r="26"/>
+            <circle class="star" cx="780" cy="100" r="4"/>
+          </g>
+          <g class="star-grp" data-label="JAX radar detection · adopted by 2–3 programs" data-body="Physics-based radar detection in JAX — two-stage geometric (az/el/range/horizon) + SNR power detection, ECEF→body-frame conversion. Per-target SNR / az / el at every RL timestep. Adopted by multiple programs; foundational to a multi-drone sim that secured Phase 2 funding." data-cat="ML">
+            <circle class="hit" cx="820" cy="280" r="22"/>
+            <circle class="star" cx="820" cy="280" r="3" style="--d:1.1s"/>
+          </g>
+          <g class="star-grp" data-label="Jira story-point regressor" data-body="2-person capstone in LM's internal AI apprenticeship: regression on ticket metadata + team labels for Jira point estimation. Adopted by the business area into their actual estimation workflow." data-cat="ML">
+            <circle class="hit" cx="720" cy="380" r="22"/>
+            <circle class="star" cx="720" cy="380" r="3" style="--d:0.3s"/>
+          </g>
+          <g class="star-grp" data-label="Detectors vs classifiers · whitepaper" data-body="DETR vs EfficientNet on wideband signal datasets (TorchSig) — structured benchmark + literature survey. Internal whitepaper now part of the team's lit-reviews for DSP architecture decisions." data-cat="ML">
+            <circle class="hit" cx="980" cy="160" r="22"/>
+            <circle class="star" cx="980" cy="160" r="3" style="--d:2.4s"/>
+          </g>
+          <g class="star-grp" data-label="IQ Classifier · 95% on UAV signals" data-body="Dockerized Big-Iron-compatible app with plug-and-play ONNX models. PyTorch classifier on 5–6 wideband UAV signal types, swapped via ActiveMQ topics. 95% accuracy — still actively used." data-cat="ML">
+            <circle class="hit" cx="1060" cy="60" r="22"/>
+            <circle class="star" cx="1060" cy="60" r="3" style="--d:1.5s"/>
+          </g>
+          <g class="star-grp" data-label="GitLab CI/CD · 1h → 8min" data-body="Built a from-scratch CI/CD on the vendor's Docker container — compile, Valgrind memory checks, then re-used the container in a HW-emulated test stage. Full build+test cycle dropped from over an hour to 8 minutes." data-cat="MLOPS">
+            <circle class="hit" cx="1020" cy="340" r="22"/>
+            <circle class="star" cx="1020" cy="340" r="3" style="--d:0.9s"/>
+          </g>
+          <g class="star-grp" data-label="Keyboard Keystroke Predictions — paper" data-body="Extended an acoustic side-channel attack paper to mechanical keyboards. Built a custom data-collection rig + multi-switch dataset; modified CoAtNet into a fusion architecture ingesting Mel-spectrogram audio + tabular keyboard metadata. 96%+ accuracy on single-key binary classification across three switch types." data-cat="PAPER">
+            <circle class="hit" cx="480" cy="420" r="22"/>
+            <circle class="star" cx="480" cy="420" r="3" style="--d:2.1s"/>
+          </g>
+          <g class="star-grp" data-label="AI Game Agent — Dead by Daylight" data-body="Computer-vision pipeline using a custom-labeled YOLOv8 dataset (annotated via Roboflow) and OCR text detection. Hardware inputs automate in-game responses in real time — currently pivoting to a lighter-weight architecture." data-cat="CV / PROJECT">
+            <circle class="hit" cx="640" cy="460" r="22"/>
+            <circle class="star" cx="640" cy="460" r="3" style="--d:1.0s"/>
+          </g>
+          <g class="star-grp" data-label="Youtube Galaxy — 3D creator viz" data-body="End-to-end NLP pipeline that scrapes YouTube creator data, embeds with all-MiniLM-L6-v2, clusters ~120 creator communities via t-SNE + K-means, names clusters with Gemini Pro, and serves results as a live 3D Plotly viz on Streamlit Cloud." data-cat="NLP / PROJECT">
+            <circle class="hit" cx="120" cy="320" r="22"/>
+            <circle class="star" cx="120" cy="320" r="3" style="--d:0.4s"/>
+          </g>
+          <g class="star-grp" data-label="Chaos Coding Agents" data-body="Multiple coding agents working in parallel on the same repo — exploring chaos-engineering ideas for agent swarms. Diverging task trees, conflict resolution, and orchestration patterns." data-cat="AGENT / PROJECT">
+            <circle class="hit" cx="240" cy="460" r="22"/>
+            <circle class="star" cx="240" cy="460" r="3" style="--d:2.8s"/>
+          </g>
+        </g>
+        <g class="lit-glow">
+          <circle cx="600" cy="180" r="10" fill="url(#nodeGlow)"/>
+          <circle cx="320" cy="240" r="10" fill="url(#nodeGlow)"/>
+          <circle cx="780" cy="100" r="10" fill="url(#nodeGlow)"/>
+          <circle cx="540" cy="320" r="10" fill="url(#nodeGlow)"/>
+        </g>
+      </svg>
+
+      <div class="v2-tl"></div>
+
+      <div class="v2-hero-content">
+        <div>
+          <div class="v2-name"><span class="acc">B</span>asem<br/><span class="acc">S</span>aleh</div>
+          <div class="label up" style="color:var(--accent); margin-top:8px; font-size:14px; letter-spacing: 0.16em;">— machine learning engineer</div>
+        </div>
+        <div class="v2-tag-r">
+          <div class="label up">— endorsement</div>
+          <div class="quote" style="font-size:20px; line-height:1.4;">"Amazing, consistent results. I only wish to keep working with him!"</div>
+          <div class="label" style="font-size:13px; color:rgba(246,243,236,0.55); margin-top:4px;">— former teammember</div>
+        </div>
+      </div>
+      <div class="hero-bottom">
+        <div class="star-hint"><span class="dot"></span><span>hover a star → see a project</span></div>
+        <div class="hero-ctas">
+          <div class="hero-ctas-row">
+            <a href="#v2-experience" class="pill accent" style="text-decoration:none;">View Experience ↓</a>
+            <a href="#v2-projects" class="pill" style="text-decoration:none;">View Projects ↓</a>
+          </div>
+          <a href="resume.pdf" class="hero-resume">↓ Download Resume</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT — split panel -->
+    <section class="sec">
+      <div class="sec-tag" style="color:rgba(246,243,236,0.5);">02 · about</div>
+      <div class="sec-h"><span style="color:var(--paper);">in three breaths.</span></div>
+      <div class="row" style="gap:48px; align-items:flex-start; margin-top:8px;">
+        <div style="flex:0 0 320px;">
+          <image-slot id="v2-portrait" style="width:100%; height:280px; display:block;" shape="rounded" radius="4" placeholder="Drop a portrait"></image-slot>
+        </div>
+        <div style="flex:1; max-width:680px;">
+          <div style="font-family:var(--hand); font-weight:300; font-size:22px; line-height:1.55; color:var(--paper);">
+            <span style="color:var(--accent);">Machine Learning Engineer that snowboards, hikes, and makes the best hot chocolate.</span><br/>
+            <span style="opacity:0.75;">Masters in AI from Johns Hopkins University.</span><br/>
+            <span style="opacity:0.75;">Bachelor's in Electrical Engineering from Drexel University.</span>
+          </div>
+          <div style="margin-top:28px; display:flex; flex-wrap:wrap; gap:8px;">
+            <span class="pill">PyTorch</span>
+            <span class="pill">Python</span><span class="pill">Computer Vision</span><span class="pill">Signal Processing</span>
+            <span class="pill">Machine Learning</span><span class="pill">Object Detection</span>
+            <span class="pill">LLM Applications</span><span class="pill">RAG</span><span class="pill">MLOps</span>
+            <span class="pill">C++</span>
+            <span class="pill">AWS</span><span class="pill">Docker</span><span class="pill">CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE — offset stacked cards -->
+    <section class="sec" id="v2-experience">
+      <div class="sec-tag" style="color:rgba(246,243,236,0.5);">03 · experience</div>
+      <div class="sec-h"><span style="color:var(--paper);">seven years · </span><span style="color:var(--accent);">one company · four roles.</span></div>
+
+      <div class="exp-stack" style="display:flex; flex-direction:column; gap:24px; margin-top:14px; position:relative;">
+
+        <!-- ROLE 1 — ML Engineer (current) -->
+        <div class="box" style="margin-right:22%; padding:22px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+            <div class="h-hand" style="font-size:26px;">Machine Learning Engineer <span class="pill accent" style="font-size:11px; padding:2px 8px;">current</span></div>
+            <div class="label">Lockheed Martin · Moorestown, NJ · Aug '24 — now</div>
+          </div>
+          <ul class="tl-bullets" style="margin-top:10px;">
+            <li>Designed a JAX Kalman-filter tracker as a fighter-jet payload — feeds the RL observation space with low-noise multi-target state estimates</li>
+            <li>Trained a multi-agent MLP RL system in JAX — <b>20% faster mission completion</b> vs. deterministic baseline via learned cooperation</li>
+            <li>Built a configurable physics-based radar detection model in JAX (two-stage geometric + SNR, ECEF→body frame) — <b>adopted by 2–3 programs</b>, foundational to multi-drone sim that secured Phase 2 funding</li>
+            <li>Stood up Weaviate + curated retrieval corpus for a hackathon RAG assistant that generates standards-compliant Cameo architectures into engineers' workspaces</li>
+            <li>Designed the Mission Manager constraint-satisfaction algorithm for the UMMA autonomous naval system — auditable go/no-go mission feasibility</li>
+            <li>Primary author on a 3-person team for the business area's <b>AI governance framework</b> — DoD 3000.09, corporate AI policy, 5 ethical principles · accepted &amp; rolling out across high-impact programs</li>
+            <li>Led KubeFlow + LakeFS automation of the AFSIM simulation + data pipeline — <b>1-day manual run → 1-hour hands-off</b>, parallel runs without oversight</li>
+          </ul>
+        </div>
+
+        <!-- ROLE 2 — AI Engineer (absorbed Spectrum Lab work) -->
+        <div class="box" style="margin-left:22%; padding:22px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+            <div class="h-hand" style="font-size:24px;">AI Engineer</div>
+            <div class="label">Lockheed Martin · Moorestown + Cherry Hill, NJ · Nov '22 — Aug '24</div>
+          </div>
+          <ul class="tl-bullets" style="margin-top:10px;">
+            <li>Helped <b>secure $1M+ in Phase-2 funding</b> — ResNet50 RF classifier in PyTorch → ONNX, deployed to radio HW for live inference · 98% accuracy on customer-collected IQ</li>
+            <li>Led 2-person capstone on a Jira story-point regressor from ticket metadata + team labels — <b>adopted into the business area's actual estimation workflow</b></li>
+            <li>Authored internal whitepaper benchmarking DETR vs EfficientNet on wideband signal (TorchSig) — used in internal literature reviews to guide DSP arch choices</li>
+            <li>Built the IQ Classifier — Big-Iron Docker app with plug-and-play ONNX model; PyTorch classifier on 5–6 UAV signal types · <b>95% accuracy · still actively used</b></li>
+            <li>Established the Spectrum Systems Lab's central repository for <b>RF multipath identification</b> — became the go-to resource across multiple programs, cut onboarding time</li>
+            <li>Built the Track Manager — a Big-Iron Dockerized app that ingests PDW data and publishes emitter on/off timing over ActiveMQ; integrated into a full multi-app EW suite</li>
+          </ul>
+        </div>
+
+        <!-- ROLE 3 — SW Eng Researcher (5G) -->
+        <div class="box" style="margin-right:22%; padding:22px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+            <div class="h-hand" style="font-size:22px;">Software Engineering Researcher</div>
+            <div class="label">Lockheed Martin · Cherry Hill, NJ · Mar '22 — Nov '22</div>
+          </div>
+          <ul class="tl-bullets" style="margin-top:10px;">
+            <li>Built a GitLab CI/CD pipeline from scratch (vendor Docker · Valgrind · HW-emulated test stage) — <b>compile + test 1 hour → 8 minutes</b></li>
+            <li>Wrote the C++ SDR front-end on custom 5G nodes — programmable transmission of proprietary research signals</li>
+            <li>Optimized antenna + frequency parameters for customer-demo environment — <b>+400% transmission range</b></li>
+            <li>Contributed to a Python traffic-monitoring tool surfacing real-time Docker container network behavior</li>
+          </ul>
+        </div>
+
+        <!-- ROLE 4 — Software Engineer (Radar, absorbs earlier test-eng automation work) -->
+        <div class="box" style="margin-left:22%; padding:22px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+            <div class="h-hand" style="font-size:22px;">Software Engineer</div>
+            <div class="label">Lockheed Martin · Moorestown, NJ · Jul '19 — Mar '22</div>
+          </div>
+          <ul class="tl-bullets" style="margin-top:10px;">
+            <li>Switch-matrix + spectrogram automation for panel S-param testing — <b>1 day → ~10 minutes per panel</b>, surfaced bad connections before customer delivery</li>
+            <li>Built a VB web app generating Tableau .twb workbooks by writing the XML directly (Python API was deprecated) — adopted by the Data Viz team as the corp-wide license-free path</li>
+            <li>Automated MATLAB-driven Noise Power Density tests against spec — permanently kept on the test chamber</li>
+            <li>Calibration data analysis driving radar pass/fail decisions for customer delivery</li>
+            <li>Python GUI exposing probe coords at the workstation — eliminated safety-door verification trips during active testing</li>
+            <li>Scrum Master for the radar team — sprint facilitation, blocker tracking, eng↔test↔PM bridge</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="sec" id="v2-projects">
+      <div class="sec-tag" style="color:rgba(246,243,236,0.5);">04 · projects</div>
+      <div class="sec-h"><span style="color:var(--paper);">side experiments.</span></div>
+      <div class="grid" style="grid-template-columns: 2fr 1fr; gap:18px;">
+        <div class="col" style="gap:18px;" data-comment-anchor="0466c2ab:319">
+          <div class="box" style="padding:0;">
+            <image-slot id="v2-proj-paper" style="width:100%; height:200px; display:block;" shape="rect" placeholder="Drop paper hero · wideband spectrogram"></image-slot>
+            <div style="padding:20px;">
+              <div style="display:flex;align-items:center;gap:10px; flex-wrap:wrap;">
+                <div class="h-hand" style="font-size:24px;">Keyboard Keystroke Predictions on Various Switches</div>
+                <span class="pill">paper · 2024</span>
+              </div>
+              <div class="body-lo" style="color:rgba(246,243,236,0.7); margin-top:6px;">Extended an acoustic side-channel attack paper to mechanical keyboards. Built a custom data-collection rig + multi-switch dataset; modified CoAtNet into a fusion architecture ingesting both Mel-spectrogram audio and tabular keyboard metadata. 96%+ accuracy on single-key binary classification across three switch types.</div>
+              <div style="display:flex; gap:8px; margin-top:10px;"><a class="pill" href="https://github.com/bsaleh524">github</a><span class="pill dim">arXiv · soon</span></div>
             </div>
-        </section>
-
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <a href="index.html" class="navbar-brand mx-auto mx-lg-0">Basem</a>
-
-                <div class="d-flex align-items-center d-lg-none">
-                    <i class="navbar-icon bi-telephone-plus me-3"></i>
-                    <a class="custom-btn btn" href="#section_5">
-                        120-240-9600
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-lg-5">
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_1">Home</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_2">About</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_3">Experiences and Projects</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_4">Education</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_5">Contact</a>
-                        </li>
-                    </ul>
-
-                    <div class="d-lg-flex align-items-center d-none ms-auto">
-                        <i class="navbar-icon bi-envelope me-3"></i>
-                        <a class="custom-btn btn" href="#section_5">
-                            bsaleh524@gmail.com
-                        </a>
-                    </div>
-                </div>
-
+          </div>
+          <div class="box" style="padding:0;">
+            <image-slot id="v2-proj-galaxy" style="width:100%; height:200px; display:block;" shape="rect" placeholder="Drop a still · Youtube Galaxy"></image-slot>
+            <div style="padding:20px;">
+              <div style="display:flex;align-items:center;gap:10px; flex-wrap:wrap;">
+                <div class="h-hand" style="font-size:24px;">Youtube Galaxy</div>
+                <span class="pill">live demo</span>
+              </div>
+              <div class="body-lo" style="color:rgba(246,243,236,0.7); margin-top:6px;">End-to-end NLP pipeline that scrapes YouTube creator data, embeds with all-MiniLM-L6-v2, clusters ~120 creator communities via t-SNE + K-means, names clusters with Gemini Pro, and serves it all as a live 3D Plotly viz on Streamlit Cloud.</div>
+              <div style="display:flex; gap:8px; margin-top:10px;"><a class="pill accent" href="https://youtube-galaxy.streamlit.app">live demo ↗</a><a class="pill" href="https://github.com/bsaleh524">github</a></div>
             </div>
-        </nav>
-
-        <main>
-
-            <section class="hero d-flex justify-content-center align-items-center" id="section_1">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-7 col-12">
-                            <div class="hero-text">
-                                <div class="hero-title-wrap d-flex align-items-center mb-4">
-                                    <img src="images/professional-headshot.jpg" class="avatar-image avatar-image-large img-fluid" alt="">
-
-                                    <h1 class="hero-title ms-3 mb-0">Hey, I'm Basem Saleh!</h1>
-                                </div>
-
-                                <h2 class="mb-4">I'm a Machine Learning Engineer.</h2>
-                                <p class="mb-4"><a href="resume/Basem_Saleh_Resume.pdf" class="custom-btn btn custom-link" href="#section_2">Resume</a></p>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-5 col-12 position-relative">
-                            <div class="hero-image-wrap"></div>
-                            <img src="images/profile-picture.jpg" class="hero-image img-fluid" alt="">
-                        </div>
-
-                    </div>
-                </div>
-
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#535da1" fill-opacity="1" d="M0,160L24,160C48,160,96,160,144,138.7C192,117,240,75,288,64C336,53,384,75,432,106.7C480,139,528,181,576,208C624,235,672,245,720,240C768,235,816,213,864,186.7C912,160,960,128,1008,133.3C1056,139,1104,181,1152,202.7C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,0L1416,0C1392,0,1344,0,1296,0C1248,0,1200,0,1152,0C1104,0,1056,0,1008,0C960,0,912,0,864,0C816,0,768,0,720,0C672,0,624,0,576,0C528,0,480,0,432,0C384,0,336,0,288,0C240,0,192,0,144,0C96,0,48,0,24,0L0,0Z"></path></svg>
-            </section>
-
-
-            <section class="about section-padding" id="section_2">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-6 col-12">
-                            <img src="images/barcelona_pose.jpg" class="about-image img-fluid" alt="">
-                        </div>
-
-                        <div class="col-lg-6 col-12 mt-5 mt-lg-0">
-                            <div class="about-thumb">
-
-                                <div class="section-title-wrap d-flex justify-content-end align-items-center mb-4">
-                                    <h2 class="text-white me-4 mb-0">My Story</h2>
-
-                                    <img src="images/professional-headshot.jpg" class="avatar-image img-fluid" alt="">
-                                </div>
-
-                                <h3 class="pt-2 mb-3">a little bit about Basem</h3>
-
-                                <p>I'm Basem Saleh, a Machine Learning Engineer. I'm the youngest of three siblings and a first-generation Egyptian-American. I am currently pursuing a part-time Masters in Artificial Intelligence at <a href="https://www.jhu.edu/" target="_blank">Johns Hopkins University</a> and hold an Electrical Engineering degree from Drexel University.</p>
-
-                                <p>I've spent my time in the defense industry, leveraging skills in machine learning and electrical engineering to solve signal processing challenges, meeting customer needs.
-                                    I'm passionate about developing models to tackle tough questions.</p>
-
-                                <p>Outside of work, I've hiked mountains, biked those mountains, snowboarded those mountains, and skiied those mountains. So yes, I'm part mountain. But I'm also inside too, trying out various hobbies like photography, video games, drawing, and much more!</p>
-
-                                <p>Also, I hate cheese.</p>
-                                
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <section class="featured section-padding">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-6 col-12">
-                            <div class="profile-thumb">
-                                <div class="profile-title">
-                                    <h4 class="mb-0">Information</h4>
-                                </div>
-
-                                <div class="profile-body">
-                                    <p>
-                                        <span class="profile-small-title">Name</span> 
-                                        <span>Basem Saleh</span>
-                                    </p>
-
-                                    <p>
-                                        <span class="profile-small-title">Birthday</span> 
-                                        <span>October 24, 1996</span>
-                                    </p>
-
-                                    <p>
-                                        <span class="profile-small-title">Phone</span> 
-                                         <span><a href="tel: 609-991-4006">609-991-4006</a></span>
-                                    </p>
-
-                                    <p>
-                                        <span class="profile-small-title">Email</span> 
-                                        <span><a href="mailto:bsaleh524@gmail.com">bsaleh524@gmail.com</a></span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-12 mt-5 mt-lg-0">
-                            <div class="about-thumb">
-                                <div class="row">
-                                    <div class="col-lg-6 col-6 featured-border-bottom py-2">
-                                        <strong class="featured-numbers">5+</strong>
-
-                                        <p class="featured-text">Years of Experiences</p>
-                                    </div>
-
-                                    <div class="col-lg-6 col-6 featured-border-start featured-border-bottom ps-5 py-2">
-                                        <strong class="featured-numbers">16+</strong>
-
-                                        <p class="featured-text">Number of Technical Skills</p>
-                                    </div>
-
-                                    <div class="col-lg-6 col-6 pt-4">
-                                        <strong class="featured-numbers">2+</strong>
-
-                                        <p class="featured-text">Personal Projects</p>
-                                    </div>
-
-                                    <div class="col-lg-6 col-6 featured-border-start ps-5 pt-4">
-                                        <strong class="featured-numbers">12+</strong>
-
-                                        <p class="featured-text">Hobbies Explored</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-
-            <section class="clients section-padding">
-                <div class="container">
-                    <div class="row align-items-center">
-
-                        <div class="col-lg-12 col-12">
-                            <h3 class="text-center mb-5">Companies I've worked at</h3>
-                        </div>
-
-                        <div class="col-lg-2 col-4 ms-auto clients-item-height">
-                            <img src="images/clients/drexel-university-logo-svg-vector.svg" class="clients-image img-fluid" alt="">
-                        </div>
-
-                        <div class="col-lg-2 col-4 me-auto clients-item-height">
-                            <img src="images/clients/Lockheed_Martin_logo.svg" class="clients-image img-fluid" alt="">
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-
-            <section class="services section-padding" id="section_3">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-10 col-12 mx-auto">
-                            <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
-                                <img src="images/handshake-man-woman-after-signing-business-contract-closeup.jpg" class="avatar-image img-fluid" alt="">
-
-                                <h2 class="text-white ms-4 mb-0">Experience and Projects</h2>
-                            </div>
-
-                            <div class="row pt-lg-5">
-                                <div class="col-lg-6 col-12">
-                                    <div class="services-thumb">
-                                        <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
-                                            <h3 class="mb-0">Machine Learning Engineer</h3>
-
-                                            <div class="services-price-wrap ms-auto">
-                                                <p class="services-price-text mb-0">Experience</p>
-                                                <div class="services-price-overlay"></div>
-                                            </div>
-                                        </div>
-                                        <ul>
-                                            <ii>Helped secure over one million in funding for a project’s second phase by classifying key customer frequencies using real-time digital signal processing machine learning models built from PyTorch.
-                                            <li>Spearheaded a project developing a model to enhance accuracy in program scheduling estimations which was later adopted by an internal team to develop into an official product.
-                                            <li>Authored an internal whitepaper evaluating efficacy of object detectors over image classification architectures in wideband signal applications.
-                                            <li>Enabled real-time field response capabilities by developing a supervised classification model for UAV signal type identification.
-                                            <li>Improved pneumonia classification model accuracy by 37% through custom model training and standing up an end-to-end machine learning training pipeline.
-                                            <li>Drove team efficiency and model data training support through authored documentation on Amazon S3 utilization.
-                                        </ul>
-
-                                        <a href="#" class="custom-btn custom-border-btn btn mt-3">Lockheed Martin</a>
-
-                                        <!-- <div class="services-icon-wrap d-flex justify-content-center align-items-center">
-                                            <i class="services-icon bi-globe"></i>
-                                        </div> -->
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-12">
-                                    <div class="services-thumb services-thumb-up">
-                                        <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
-                                            <h3 class="mb-0">Software Engineering Researcher</h3>
-
-                                            <div class="services-price-wrap ms-auto">
-                                                <p class="services-price-text mb-0">Experience</p>
-                                                <div class="services-price-overlay"></div>
-                                            </div>
-                                        </div>
-
-                                        <ul>
-                                            <li>Reduced team’s code compilation time from 1 hour to 8 minutes using automated Gitlab CI/CD pipelines.
-                                            <li>Enabling seamless transmission and reception of proprietary research signals through usage of C++ to control the front-end of Software Defined Radios on custom 5G nodes.
-                                            <li>Ensured reliability and functionality of compiled hardware code by creating Unit Tests using Python and Bash within the software pipeline.
-                                            <li>Improved radio transmission range by 400% for customer demonstrations by selecting optimal antenna frequencies for custom 5G nodes.
-                                            <li>Aided in network error identification and resolution from a Python-based traffic monitoring tool designed for Docker containers
-                                        </ul>
-
-                                        <a href="#" class="custom-btn custom-border-btn btn mt-3">Lockheed Martin</a>
-
-                                        <!-- <div class="services-icon-wrap d-flex justify-content-center align-items-center">
-                                            <i class="services-icon bi-lightbulb"></i>
-                                        </div> -->
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-12">
-                                    <div class="services-thumb">
-                                        <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
-                                            <h3 class="mb-0">Software Engineer</h3>
-
-                                            <div class="services-price-wrap ms-auto">
-                                                <p class="services-price-text mb-0">Experience</p>
-                                                <div class="services-price-overlay"></div>
-                                            </div>
-                                        </div>
-
-                                        <ul>
-                                            <li>Performed analysis on new calibration data to determine if radar calibration is sufficient for customer delivery using MATLAB.
-                                            <li>Saved over $70,000 in radar project costs by refactoring legacy architecture of a radar error model.
-                                            <li>Reduced radar panel calibration time from one day to 10 minutes using C# to control an oscilloscope and switch matrix.
-                                            <li>Analyzed and verified customer product functionality by collecting and analyzing S-parameter data from panel calibrations.
-                                        </ul>
-
-                                        <a href="#" class="custom-btn custom-border-btn btn mt-3">Lockheed Martin</a>
-
-                                        <!-- <div class="services-icon-wrap d-flex justify-content-center align-items-center">
-                                            <i class="services-icon bi-phone"></i>
-                                        </div> -->
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-12">
-                                    <div class="services-thumb services-thumb-up">
-                                        <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
-                                            <h3 class="mb-0">AI Game Agent for Dead By Daylight</h3>
-
-                                            <div class="services-price-wrap ms-auto">
-                                                <p class="services-price-text mb-0">Project (WIP)</p>
-                                                <div class="services-price-overlay"></div>
-                                            </div>
-                                        </div>
-
-                                        <p>
-                                            Developed an AI Agent that utilizes object detection and DEEPSort tracking to achieve goals of the "Killer" role in the popular videogame Dead By Daylight. Commands sent through external radio interface to computer acting as a bluetooth keyboard.
-                                        </p>
-
-                                        <a href="" class="custom-btn custom-border-btn btn mt-3">Youtube Video</a>
-                                        <a href="https://github.com/bsaleh524/DBD-Killer-AI" class="custom-btn custom-border-btn btn mt-3">Check out on Github</a>
-                                        <a href="https://universe.roboflow.com/deadbydaylightkillerai/killer_ai_object_detection/model/3" class="custom-btn custom-border-btn btn mt-3">Give it a try!</a>
-                                        
-                                        <!-- <div class="services-icon-wrap d-flex justify-content-center align-items-center">
-                                            <i class="services-icon bi-google"></i>
-                                        </div> -->
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-12">
-                                    <div class="services-thumb">
-                                        <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
-                                            <h3 class="mb-0">Deadlift Form Checker</h3>
-
-                                            <div class="services-price-wrap ms-auto">
-                                                <p class="services-price-text mb-0">Project (WIP)</p>
-                                                <div class="services-price-overlay"></div>
-                                            </div>
-                                        </div>
-
-                                        <p>
-                                            Built a model that helps predicts proper form on a deadlift from the side continuously on a given video.
-                                        </p>
-
-                                        <a href="#" class="custom-btn custom-border-btn btn mt-3">Lockheed Martin</a>
-
-                                        <!-- <div class="services-icon-wrap d-flex justify-content-center align-items-center">
-                                            <i class="services-icon bi-phone"></i>
-                                        </div> -->
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            <section class="projects section-padding" id="section_4">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-8 col-md-8 col-12 mx-auto">
-                            <div class="section-title-wrap d-flex justify-content-center align-items-center mb-4">
-                                <img src="images/schools/degree.jpg" class="avatar-image img-fluid" alt="">
-
-                                <h2 class="text-white ms-4 mb-0">Education</h2>
-                            </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="projects-thumb">
-                                <div class="projects-info">
-                                    <small class="projects-tag">MS from Johns Hopkins University</small>
-
-                                    <h3 class="projects-title">Artificial Intelligence</h3>
-                                </div>
-
-                                <a href="images/schools/JHULogo.png" class="popup-image">
-                                    <img src="images/schools/JHULogo.png" class="projects-image img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="projects-thumb">
-                                <div class="projects-info">
-                                    <small class="projects-tag">BS from Drexel University</small>
-
-                                    <h3 class="projects-title">Electrical Engineering</h3>
-                                </div>
-
-                                <a href="images/schools/DrexelLogo.jpg" class="popup-image">
-                                    <img src="images/schools/DrexelLogo.jpg" class="projects-image img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- <div class="col-lg-4 col-md-6 col-12">
-                            <div class="projects-thumb">
-                                <div class="projects-info">
-                                    <small class="projects-tag">Website</small>
-
-                                    <h3 class="projects-title">Polo</h3>
-                                </div>
-
-                                <a href="images/projects/true-agency-9Bjog5FZ-oc-unsplash.jpg" class="popup-image">
-                                    <img src="images/projects/true-agency-9Bjog5FZ-oc-unsplash.jpg" class="projects-image img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div> -->
-
-                    </div>
-                </div>
-            </section>
-
-            <section class="contact section-padding" id="section_5">
-                    <div class="container">
-                        <div class="row">
-
-                            <div class="col-lg-6 col-md-8 col-12">
-                                <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
-                                    <img src="images/aerial-view-man-using-computer-laptop-wooden-table.jpg" class="avatar-image img-fluid" alt="">
-
-                                    <h2 class="text-white ms-4 mb-0">Say Hi</h2>
-                                </div>
-                            </div>
-
-                            <div class="clearfix"></div>
-
-                            <div class="col-lg-3 col-md-6 col-12 pe-lg-0">
-                                <div class="contact-info contact-info-border-start d-flex flex-column">
-                                    <strong class="site-footer-title d-block mb-3">Services</strong>
-
-                                    <ul class="footer-menu">
-                                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Websites</a></li>
-
-                                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Collaboration</a></li>
-
-                                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Ecommerce</a></li>
-
-                                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Roles</a></li>
-                                    </ul>
-
-                                    <strong class="site-footer-title d-block mt-4 mb-3">Stay connected</strong>
-
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item"><a href="https://twitter.com/spookypharaoh" class="social-icon-link bi-twitter"></a></li>
-
-                                        <li class="social-icon-item"><a href="https://www.instagram.com/spooky_saleh/" class="social-icon-link bi-instagram"></a></li>
-
-                                        <li class="social-icon-item"><a href="https://github.com/bsaleh524" class="social-icon-link bi-github"></a></li>
-
-                                        <li class="social-icon-item"><a href="https://www.youtube.com/@SpookyPharoah" class="social-icon-link bi-youtube"></a></li>
-                                    </ul>
-
-                                    <strong class="site-footer-title d-block mt-4 mb-3">Reach out!</strong>
-
-                                    <p class="mb-0">I’m available for full-time hiring.</p>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-md-6 col-12 ps-lg-0">
-                                <div class="contact-info d-flex flex-column">
-                                    <strong class="site-footer-title d-block mb-3">About</strong>
-
-                                    <p class="mb-2">
-                                        I'm Basem, a Machine Learning Engineer. Feel free to get in touch with me.
-                              </p>
-
-                                    <strong class="site-footer-title d-block mt-4 mb-3">Email</strong>
-
-                                    <p>
-                                        <a href="mailto:hello@josh.design">
-                                            bsaleh524@gmail.com
-                                        </a>
-                                    </p>
-
-                                    <strong class="site-footer-title d-block mt-4 mb-3">Call</strong>
-
-                                    <p class="mb-0">
-                                        <a href="tel: 609-991-4006">
-                                            609-991-4006
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-12 mt-5 mt-lg-0">
-                                <form action="#" method="get" class="custom-form contact-form" role="form">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <div class="form-floating">
-                                                <input type="text" name="name" id="name" class="form-control" placeholder="Name" required="">
-                                                
-                                                <label for="floatingInput">Name</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-6 col-12"> 
-                                            <div class="form-floating">
-                                                <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required="">
-                                                
-                                                <label for="floatingInput">Email address</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-6">
-                                            <div class="form-check form-check-inline">
-                                                <input name="website" type="checkbox" class="form-check-input" id="inlineCheckbox1" value="1">
-
-                                                <label class="form-check-label" for="inlineCheckbox1">
-                                                    <i class="bi-globe form-check-icon"></i>
-                                                    <span class="form-check-label-text">Websites</span>
-                                                </label>
-                                          </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-6">
-                                            <div class="form-check form-check-inline">
-                                                <input name="branding" type="checkbox" class="form-check-input" id="inlineCheckbox2" value="1">
-
-                                                <label class="form-check-label" for="inlineCheckbox2">
-                                                    <i class="bi-lightbulb form-check-icon"></i>
-                                                    <span class="form-check-label-text">Collaboration</span>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-6">
-                                            <div class="form-check form-check-inline">
-                                                <input name="ecommerce" type="checkbox" class="form-check-input" id="inlineCheckbox3" value="1">
-
-                                                <label class="form-check-label" for="inlineCheckbox3">
-                                                    <i class="bi-phone form-check-icon"></i>
-                                                    <span class="form-check-label-text">Ecommerce</span>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-6 col-6">
-                                            <div class="form-check form-check-inline me-0">
-                                                <input name="seo" type="checkbox" class="form-check-input" id="inlineCheckbox4" value="1">
-
-                                                <label class="form-check-label" for="inlineCheckbox4">
-                                                    <i class="bi-google form-check-icon"></i>
-                                                    <span class="form-check-label-text">Roles</span>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12 col-12">
-                                            <div class="form-floating">
-                                                <textarea class="form-control" id="message" name="message" placeholder="Tell me about the project"></textarea>
-                                                
-                                                <label for="floatingTextarea">Contact Me</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-12 ms-auto">
-                                            <button type="submit" class="form-control">Send</button>
-                                        </div>
-
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </main>
-
-        <footer class="site-footer">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-12 col-12">
-                        <div class="copyright-text-wrap">
-                            <p class="mb-0">
-                                <span class="copyright-text">Copyright © 2036 <a href="#">First Portfolio</a> Company. All rights reserved.</span>
-                                Design: 
-                                <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
+          </div>
+        </div>
+        <div class="col" style="gap:18px;" data-comment-anchor="5d68a9a1:339">
+          <div class="box" style="padding:0;">
+            <image-slot id="v2-proj-gameagent" style="width:100%; height:100px; display:block;" shape="rect" placeholder="Drop gameplay clip · CV overlay"></image-slot>
+            <div style="padding:14px 16px;">
+              <div style="display:flex;align-items:center;gap:8px; flex-wrap:wrap;">
+                <div class="h-hand" style="font-size:19px;">AI Game Agent — Dead by Daylight</div>
+                <span class="pill accent">WIP</span>
+              </div>
+              <div class="body-lo" style="color:rgba(246,243,236,0.7); margin-top:6px;">CV pipeline on a custom YOLOv8 dataset (Roboflow) + OCR; hardware inputs automate in-game responses in real time. Explored multi-threaded command execution; pivoting to a lighter architecture.</div>
+              <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;"><a class="pill" href="https://github.com/bsaleh524">github</a></div>
             </div>
-        </footer>
+          </div>
+          <div class="box" style="padding:0;">
+            <image-slot id="v2-proj-chaos" style="width:100%; height:100px; display:block;" shape="rect" placeholder="Drop terminal capture · agent swarm"></image-slot>
+            <div style="padding:14px 16px;">
+              <div style="display:flex;align-items:center;gap:8px; flex-wrap:wrap;">
+                <div class="h-hand" style="font-size:19px;">Chaos Coding Agents</div>
+              </div>
+              <div class="body-lo" style="color:rgba(246,243,236,0.7); margin-top:6px;">LLM orchestration + context management. Two rival AI personas iteratively rewrite each other's code, while a panicking intern summarizes the aftermath.</div>
+              <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;"><a class="pill" href="https://github.com/bsaleh524">github</a></div>
+            </div>
+          </div>
+          <div class="box" style="padding:0;">
+            <image-slot id="v2-proj-ytmusic" style="width:100%; height:100px; display:block;" shape="rect" placeholder="Drop a screen capture · waveform UI"></image-slot>
+            <div style="padding:14px 16px;">
+              <div style="display:flex;align-items:center;gap:8px; flex-wrap:wrap;">
+                <div class="h-hand" style="font-size:19px;">YT Music Rec Engine</div>
+                <span class="pill accent">planned</span>
+              </div>
+              <div class="body-lo" style="color:rgba(246,243,236,0.7); margin-top:6px;">YouTube's creator audio library is royalty-free but only filterable by genre / mood. Drop in a Spotify or YouTube Music link → recommend the closest copyright-safe match.</div>
+              <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;"><span class="pill dim">github · soon</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.sticky.js"></script>
-        <script src="js/click-scroll.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/magnific-popup-options.js"></script>
-        <script src="js/custom.js"></script>
+    <!-- EDU + CONTACT row -->
+    <section class="sec">
+      <div class="row" style="gap:24px; align-items:stretch;">
+        <div style="flex:1.5;">
+          <div class="sec-tag" style="color:rgba(246,243,236,0.5);">05 · education</div>
+          <div class="h-hand" style="font-size:32px; margin-top:8px; line-height:1.05;">Master's in Artificial Intelligence</div>
+          <div class="label" style="font-size:17px; margin-top:2px;">Johns Hopkins University</div>
+          <div class="h-hand" style="font-size:32px; margin-top:18px; line-height:1.05;">Bachelor's in Electrical Engineering</div>
+          <div class="label" style="font-size:17px; margin-top:2px;">Drexel University</div>
+        </div>
+        <div style="flex:1; padding:22px; background: var(--accent); border-color: var(--accent); color: var(--ink); display:flex; flex-direction:column; justify-content:space-between; min-height:200px;" class="box" data-comment-anchor="c70cac95:351">
+          <div>
+            <div class="label up" style="color:var(--ink); opacity:0.7;">06 · contact</div>
+            <div class="h-hand" style="font-size:26px; color:var(--ink); margin-top:6px;">Open to full-time roles.</div>
+          </div>
+          <div class="contact-icons">
+            <a href="mailto:bsaleh524@gmail.com" class="contact-icon" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2.5" y="5" width="19" height="14" rx="1.5"/>
+                <path d="M3 6.5 12 13l9-6.5"/>
+              </svg>
+            </a>
+            <a href="https://github.com/bsaleh524" class="contact-icon" aria-label="GitHub" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.03c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.25 3.35.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.08 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.18c0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z"/>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/basem-a-saleh/" class="contact-icon" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.99 0 1.78-.78 1.78-1.73V1.73C24 .78 23.21 0 22.22 0Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
 
-    </body>
+
+
+
+</div>
+
+<script>
+  // ── Constellation star tooltips ──
+  (function constellation() {
+    // tooltip element
+    const tip = document.createElement('div');
+    tip.className = 'star-tip';
+    tip.innerHTML = '<div class="tip-cat"></div><div class="tip-label"></div><div class="tip-body"></div>';
+    document.body.appendChild(tip);
+    const tCat   = tip.querySelector('.tip-cat');
+    const tLabel = tip.querySelector('.tip-label');
+    const tBody  = tip.querySelector('.tip-body');
+
+    let activeGrp = null;
+    function show(grp, x, y) {
+      tCat.textContent   = grp.getAttribute('data-cat') || '';
+      tLabel.textContent = grp.getAttribute('data-label') || '';
+      tBody.textContent  = grp.getAttribute('data-body') || '';
+      tip.classList.add('show');
+      position(x, y);
+      activeGrp = grp;
+    }
+    function hide() {
+      tip.classList.remove('show');
+      activeGrp = null;
+    }
+    function position(x, y) {
+      // flip horizontally near the right edge
+      const tw = tip.offsetWidth || 280;
+      const th = tip.offsetHeight || 100;
+      let tx = x + 14, ty = y + 18;
+      if (tx + tw > window.innerWidth - 16) tx = x - tw - 14;
+      if (ty + th > window.innerHeight - 16) ty = y - th - 14;
+      tip.style.left = tx + 'px';
+      tip.style.top  = ty + 'px';
+    }
+
+    document.querySelectorAll('.v2-net .star-grp').forEach(grp => {
+      grp.addEventListener('mouseenter', (e) => show(grp, e.clientX, e.clientY));
+      grp.addEventListener('mousemove',  (e) => { if (activeGrp === grp) position(e.clientX, e.clientY); });
+      grp.addEventListener('mouseleave', hide);
+      // a11y: keyboard focusable
+      grp.setAttribute('tabindex', '0');
+      grp.addEventListener('focus', (e) => {
+        const r = grp.getBoundingClientRect();
+        show(grp, r.left + r.width / 2, r.top + r.height / 2);
+      });
+      grp.addEventListener('blur', hide);
+    });
+  })();
+</script>
+
+<script src="image-slot.js"></script>
+</body>
 </html>
